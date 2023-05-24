@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "cstring.h"
 namespace sdds {
 
 // Copies the source character string into the destination
@@ -23,44 +23,34 @@ namespace sdds {
             des[i] = src[i];
             i++;
         }
+        if (i < len)
         des[i] = '\0';
     }
 
-// Compares two C-strings 
+// Compares two C-strings
 // returns 0 if they'e the same
 // return > 0 if s1 > s2
 // return < 0 if s1 < s2
     int strCmp(const char* s1, const char* s2) {
-        int result, i = 0;
-
-        while (s1[i] != '\0' && s2[i] != '\0') {
-            if (s1[i] < s2[i])
-                result = -1;
-            else if (s1[i] > s2[i])
-                result = 1;
-            i++;
+        while (*s1 && (*s1 == *s2)) {
+            s1++;
+            s2++;
         }
-        if (s1[i] == '\0' && s2[i] == '\0')
-            result = 0;
-        else if (s1[i] == '\0')
-            result = -1;
-        else
-            result = 1;
-        return result;
+        return (*s1) - (*s2);
     }
 
-// returns 0 i thare the same
+// returns 0 if they're the same
 // return > 0 if s1 > s2
 // return < 0 if s1 < s2
     int strnCmp(const char* s1, const char* s2, int len) {
-        int result, i = 0;
-
-        while (i < len && s1[i] != '\0' && s2[i] != '\0') {
-            i++;
-        }    
-        result = strCmp(s1, s2);
-        return result;
-    } 
+        
+        while (*s1 && (*s1 == *s2) && len - 1 > 0) {
+            s1++;
+            s2++;
+            len--;
+        }
+        return (*s1) - (*s2);
+    }
 
 // returns the lenght of the C-string in characters
     int strLen(const char* s) {
