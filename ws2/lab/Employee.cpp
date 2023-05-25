@@ -31,7 +31,7 @@ namespace sdds {
     
         if(read(m.m_empNo) && read(m.m_salary) && read(name)) { //if reading of employee number, salay and name are successful
             m.m_name = new char[strLen(name)+1]; //while keeping the address in the name of the Employee Referencewhich is the size of the name +1
-            strCpy(name,m.m_name); //copy the name into the newly allocated memory
+            strCpy(m.m_name,name); //copy the name into the newly allocated memory
             ok = true;
         }
       return ok;
@@ -44,8 +44,8 @@ namespace sdds {
       if (openFile(DATAFILE)) {
          noOfEmployees = noOfRecords(); //Set the noOfEmployees to the number of recoreds in the file.
          employees = new Employee[noOfEmployees]; //dynamically allocate an array of employees into the global Employee pointer; "employees" to the size of the noOfEmployees.
-         for (i=0; i < noOfEmployees; i++) { 
-            load(employees[i]); //In a loop load the employee records from the file into the dynamic array.
+         for (i=0; i < noOfEmployees;) { 
+            i += load(employees[i]); //In a loop load the employee records from the file into the dynamic array.
          }
          if (i != noOfEmployees) { //When the number of the records does not match the number of reads
             cout << "Error: incorrect number of records read; the data is possibly corrupted" << endl;
