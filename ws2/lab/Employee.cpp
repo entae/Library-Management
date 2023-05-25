@@ -38,7 +38,7 @@ namespace sdds {
    }
 
    // TODO: Finish the implementation of the 0 arg load function 
-   bool load() {
+   bool load(void) {
       bool ok = false;
       int i = 0;
       if (openFile(DATAFILE)) {
@@ -64,7 +64,7 @@ namespace sdds {
       cout << m.m_empNo << ": " << m.m_name << ", " << m.m_salary << endl;
    }
 
-   void display() {
+   void display(void) {
       cout << "Employee Salary report, sorted by employee number" << endl;
       cout << "no- Empno, Name, Salary" << endl;
       cout << "------------------------------------------------" << endl;

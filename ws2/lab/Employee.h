@@ -10,9 +10,9 @@ namespace sdds {
    };
    void sort();
    bool load(Employee &m);
-   bool load();
+   bool load(void);
    void display(const Employee& m);
-   void display();
+   void display(void);
    void deallocateMemory();
 }  
 #endif // !SDDS_EMPLOYEE_H_
