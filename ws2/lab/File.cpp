@@ -30,11 +30,11 @@ namespace sdds {
    }
    
    bool read(int& m_empNo) {
-      return fscanf(fptr, "%d,", m_empNo) == 1;
+      return fscanf(fptr, "%d,", &m_empNo) == 1;
    }
 
    bool read(double& m_salary) {
-      return fscanf(fptr, "%lf,", m_salary) == 1;
+      return fscanf(fptr, "%lf,", &m_salary) == 1;
    }
 
 }
