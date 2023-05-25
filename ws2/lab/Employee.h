@@ -14,6 +14,5 @@ namespace sdds {
    void display(const Employee& m);
    void display();
    void deallocateMemory();
-   
 }  
 #endif // !SDDS_EMPLOYEE_H_
