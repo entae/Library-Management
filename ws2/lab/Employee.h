@@ -11,6 +11,8 @@ namespace sdds {
    void sort();
    bool load(Employee &m);
    bool load();
+   void display(const Employee& m);
+   void display();
    void deallocateMemory();
    
 }  
