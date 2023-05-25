@@ -70,7 +70,7 @@ namespace sdds {
       cout << "no- Empno, Name, Salary" << endl;
       cout << "------------------------------------------------" << endl;
       sort();
-      while (int i = 0; i < noOfEmployees; i++) {
+      for (int i = 0; i < noOfEmployees; i++) {
          cout << i+1 << "- ";
          display(employees[i]);
       } 
