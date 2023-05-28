@@ -10,7 +10,7 @@ namespace sdds {
 
     bool load(Postal &pos) {
         bool ok = false;
-        char name[7];
+        char name[128];
         if (read(name) && read(pos.p_population)) {
             pos.p_code = new char[strLen(name) + 1];
             strCpy(pos.p_code, name);
@@ -28,7 +28,6 @@ namespace sdds {
     // Error: incorrect number of records read; the data is possibly corrupted!<ENDL>
     bool load(const char filename[]) {
         bool ok = false;
-        char name[128];
         int i = 0;
 
         if (openFile(filename)) {
@@ -66,10 +65,6 @@ namespace sdds {
             }
             pos[j + 1] = temp;
         }
-    }
-
-    void display(const Postal& pos) {
-      cout << ": " << pos.p_code << ", " << pos.p_population << endl;
     }
 
     void display(const Postal& pos) {
