@@ -3,20 +3,21 @@
 #include "File.h"
 #include "cstring.h"
 using namespace std;
+
 namespace sdds {
+
     int noOfPostal;
     int noOfPopulation;
     Postal* pos;
 
-    bool load(Postal &pos) {
+    bool load(Postal &p) {
         bool ok = false;
         char name[128];
-        if (read(name) && read(pos.p_population)) {
-            pos.p_code = new char[strLen(name) + 1];
-            strCpy(pos.p_code, name);
+        if (read(name) && read(p.p_population)) {
+            p.p_code = new char[strLen(name) + 1];
+            strCpy(p.p_code, name);
             ok = true;
         }
-
         return ok;
     }
 //Loads data from a file, and returns true if data was successfully loaded, false otherwise. 
@@ -41,20 +42,16 @@ namespace sdds {
             if ( i != noOfPostal) {
                 cout << "Error: incorrect number of records read; the data is possibly corrupted!" << endl;
             }
-            else   
+            else {
                 ok = true;
+            }
             closeFile();
         } else {
             cout << "Could not open data file: " << filename << endl;
         }
         return ok;
-   }
+    }
 
-/*   struct Postal {
-      char* p_code;
-      double p_population;
-   };
-   */
     void sort() {
         int i, j;
         Postal temp;
@@ -85,6 +82,7 @@ namespace sdds {
         cout << "-------------------------" << endl;
         cout << "Population of Canada: " << noOfPopulation << endl;
     }
+
 //a function with no parameters that return nothing and deallocate all dynamic memory used by the program.
     void deallocateMemory() {
       if (pos != nullptr) {
