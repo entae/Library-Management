@@ -25,12 +25,12 @@ namespace sdds {
       if (fptr) fclose(fptr);
    }
    
-   bool read(char *postal) {
-      return fscanf(fptr, "%[^,],", postal) == 1;
+   bool read(char *p_postal) {
+      return fscanf(fptr, "%[^,],", p_postal) == 1;
    }
    
-   bool read(int& population) {
-      return fscanf(fptr, "%d\n", &population) == 1;
+   bool read(int& p_population) {
+      return fscanf(fptr, "%d\n", &p_population) == 1;
    }
 
 }

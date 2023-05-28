@@ -5,7 +5,7 @@ namespace sdds {
    
    struct Postal {
       char* p_code;
-      double p_population;
+      int p_population;
    };
     void sort();
     bool load(Postal &p);
