@@ -1,0 +1,6 @@
+Workshop 2 - DIY; InTae Chung, 128 958 220, itchung@myseneca.ca
+
+This workshop was very difficult in the beginning. While the "void sort()" function in the beginning of the lab helped to provide an example of how to implement the syntax for when using object arrays in dynamic memory, I still struggled to write the bool load functions. Thankfully being able to use the previous functions in the "cstring.h" was a great help. 
+Overloading functions was an interesting experience but not particularly hard to grasp as you treat the function as doing different tasks as long as their parameters type / numbers are different. 
+The DIY portion of this workshop helped to further strength the relationship between the class, object pointer, and the values of variables in the object. I still don't feel quite as confident as I found writing the code fairly difficult, however I feel as this workshop has forced me to understand it much better than before.
+I found the deallocationMemory function very interesting conceptually for preventing memory leaks, which I understood well enough from the diagrams shown in class. 

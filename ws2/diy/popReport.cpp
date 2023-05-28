@@ -1,6 +1,6 @@
 /***********************************************************************
 // Intro. to Object Oriented Programming
-// Workshop  Part 2
+// Workshop 2 Part 2
 // Version 1.0
 // Description
 // professor's tester program
@@ -11,10 +11,11 @@
 //
 /////////////////////////////////////////////////////////////////
 ***********************************************************************/
-#include "Employee.h"
+
+#include "Population.h"
 using namespace sdds;
 int main() {
-   if (load()) {
+   if (load("PCpopulations.csv")) {
       display();
    }
    deallocateMemory();
