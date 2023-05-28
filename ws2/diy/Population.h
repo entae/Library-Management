@@ -7,8 +7,12 @@ namespace sdds {
       char* p_code;
       double p_population;
    };
-    bool load();
+    void sort();
+    bool load(Postal &p);
+    bool load(char filename[]);
     void display(void);
+    void display(const Postal& pos);
+    void display();
     void deallocateMemory();
     
 }
