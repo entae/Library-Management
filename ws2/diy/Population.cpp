@@ -27,7 +27,7 @@ namespace sdds {
 
     //If the file doesn't have a correct content, print:
     // Error: incorrect number of records read; the data is possibly corrupted!<ENDL>
-    bool load(char filename[]) {
+    bool load(const char filename[]) {
         bool ok = false;
         int i = 0;
 

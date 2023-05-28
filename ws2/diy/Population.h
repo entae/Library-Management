@@ -9,8 +9,7 @@ namespace sdds {
    };
     void sort();
     bool load(Postal &p);
-    bool load(char filename[]);
-    void display(void);
+    bool load(const char filename[]);
     void display(const Postal& pos);
     void display();
     void deallocateMemory();
