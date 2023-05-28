@@ -26,11 +26,11 @@ namespace sdds {
    }
    
    bool read(char *postal) {
-      return fscanf(fptr, "%[^\n]\n", postal) == 1;
+      return fscanf(fptr, "%[^,],", postal) == 1;
    }
    
    bool read(int& population) {
-      return fscanf(fptr, "%d,", &population) == 1;
+      return fscanf(fptr, "%d\n", &population) == 1;
    }
 
 }
