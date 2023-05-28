@@ -5,9 +5,8 @@ namespace sdds {
    bool openFile(const char filename[]);
    void closeFile();
    int noOfRecords();
-   bool read(char *m_name);
-   bool read(int& m_empNo);
-   bool read(double& m_salary);
+   bool read(char *postal);
+   bool read(int& population);
    
 }
 #endif // !SDDS_FILE_H_
