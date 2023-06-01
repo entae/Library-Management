@@ -8,6 +8,7 @@
 #ifndef SDDS_ITEM_H_
 #define SDDS_ITEM_H_
 namespace sdds {
+   
    class Item {
       char m_itemName[21];
       double m_price;
