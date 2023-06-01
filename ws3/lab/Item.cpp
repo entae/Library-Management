@@ -70,7 +70,7 @@ namespace sdds {
     }
     //Returns true if the Item is not set to an empty state (As done in setEmpty function) .
         bool Item::isValid()const {
-            return m_itemName[0] != '\0' && m_price >= 0;
+            return m_itemName[0] != '\0' && m_price > 0;
         }
     //Returns the m_price attribute;
         double Item::price()const {
