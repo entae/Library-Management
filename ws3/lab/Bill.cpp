@@ -41,11 +41,12 @@ namespace sdds {
 
         //Valid if Item name and price hold valid values 
         if(isValid()){
-          cout << "| " << m_title;
-          line(36 - strlen(m_title),' '); //adjusting the length of the line to account for the title
+          cout << "| ";
+          cout.width(36);
+          cout << m_title;
           cout << " |" << endl;
         } else { 
-          cout << "| " << left << "Invalid Bill";
+          cout << "| " << "Invalid Bill";
           line(24,' ');       
           cout << " |" << endl;
         }
@@ -58,7 +59,7 @@ namespace sdds {
         line(5,'-');
         cout << '+' << endl;
 
-        cout << "| " << left << "Item Name";
+        cout << "| Item Name";
         line(11,' ');
         cout << " | Price   + Tax |" << endl;
 
