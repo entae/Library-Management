@@ -43,10 +43,10 @@ namespace sdds {
         if(isValid()){
           cout << "| ";
           cout.width(36);
-          cout << m_title;
+          cout << left << m_title;
           cout << " |" << endl;
         } else { 
-          cout << "| " << "Invalid Bill";
+          cout << "| Invalid Bill";
           line(24,' ');       
           cout << " |" << endl;
         }

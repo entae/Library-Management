@@ -47,8 +47,7 @@ namespace sdds {
             cout << "| ";
             cout.width(20);
             cout.fill('.');
-            cout.setf(ios::left);
-            cout << m_itemName << " | ";
+            cout << left << m_itemName << " | ";
             
             cout.width(7);
             cout.precision(2);
