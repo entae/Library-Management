@@ -1,0 +1,9 @@
+In Tae Chung, itchung@myseneca.ca, 128 958 220;
+
+This workshop i got a lot more familiar with the std::cout function. In the beginning there was some trouble getting the format to output properly. However, after learning that the ios::right had to be unset since setf(ios::right) will override the setf(ios::left), most of the output format issues were solved. I also found out that I could use cout << left << “string”; to format my output as well if needed, which I found more intuitive to use. I was also able to implement a line function that I used in the previous semester’s ipc144 class to more easily print out lines where where there were no variables.
+
+Another part I had trouble with in the beginning was when I was trying to use the classes with a namespace. So instead of using Food::setName, I was trying use namespace Food, but quickly realized that since Food was a class and not a namespace, it could not be used like a namespace.
+
+This workshop also helped me see how initializing class members into empty states could be used by methods within classes so that undesired outcomes could be avoided. 
+
+In the DIY, everything was very similar to the lab component of the workshop. Compared to the lab, one part I added was for changing the mealtime value into the desired string (ie. 1 = “Breakfast.” I achieved the outcome I wanted by using multiple ternary operators and was satisfied with the readability of the code, but if it seems hard to read, I know I could also use a switch statement. 

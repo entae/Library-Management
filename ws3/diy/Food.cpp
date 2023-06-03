@@ -10,28 +10,72 @@
 #include "Food.h"
 using namespace std;
 namespace sdds {
+    void Food::setName(const char* name) {
+        strnCpy(f_name, name, 30);
+        f_name[30] = '\0';
+    }
+
+    void Food::setEmpty() {
+        f_name[0] = '\0';
+        f_cal = 0;
+        f_when = 0;
+    }
+
+    void Food::set(const char* name, int calorie, int mealtime) {
+        if (name != nullptr) {
+            setName(name);
+        } else {
+            setName("");
+        }
+        if (calorie > 0) {
+            f_cal = calorie;
+        } else {
+            f_cal = 0;
+        }
+        if (mealtime > 0) {
+            f_when = mealtime;
+        } else {
+            f_when = 0;
+        }
+    }
+
     void Food::display()const {
-        if
+        if (isValid()) {
             cout << "| ";
-            cout.width(20);
+            cout.width(30);
             cout.fill('.');
-            cout << left << m_itemName << " | ";
-            
-            cout.width(7);
-            cout.precision(2);
-            cout.setf(ios::fixed);
-            cout.setf(ios::right);
+            cout << left << f_name << " | ";
+
+            cout.width(4);
             cout.fill(' ');
-            cout << m_price << " | ";
-            cout.unsetf(ios::right);
-            
-            cout << (m_taxed ? "Yes" : "No ") << " |" << endl;
+            cout << right << f_cal << " | ";
+
+            // ternary operator to change f_when into designated string;
+            const char* mealtime = (f_when == 1) ? "Breakfast" :
+                                   (f_when == 2) ? "Lunch" :
+                                   (f_when == 3) ? "Dinner" :
+                                   (f_when == 4) ? "Snack" :
+                                   "Bedtime";
+            cout.width(11);
+            cout.fill(' ');
+            cout << left << mealtime << '|' << endl;
         } else {
             cout << "| ";
-            line(20,'x');
+            line (30, 'x');
             cout << " | ";
-            line(7,'x');
+            line (4,'x');
             cout << " | ";
-            cout << "xxx |" << endl;
+            line(10,'x');
+            cout << " |" << endl;
+        }
     }
+
+    bool Food::isValid()const {
+        return f_name[0] != '\0' && f_cal > 0;
+    }
+
+    int Food::calorieCount()const {
+        return f_cal; 
+    }
+        
 }

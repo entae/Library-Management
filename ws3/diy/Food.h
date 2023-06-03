@@ -8,12 +8,21 @@
 #ifndef SDDS_FOOD_H
 #define SDDS_FOOD_H
 namespace sdds {
+
     class Food {
         char f_name[31];
-        int calorieNum;
-        int consumptionTime;
-        
+        int f_cal;
+        int f_when;
+
+        void setName(const char* name);
+
+    public:
+        void setEmpty();
+        void set(const char* name, int calorie, int mealtime);
         void display()const;
-    }
+        bool isValid()const;
+        int calorieCount()const;
+    };
 }
+
 #endif // !SDDS_FOOD_H

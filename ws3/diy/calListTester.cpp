@@ -19,6 +19,7 @@
 #include <iostream>
 #include <cstdio>
 #include "CalorieList.h"
+
 using namespace sdds;
 using namespace std;
 const int c_breakfast = 1;
