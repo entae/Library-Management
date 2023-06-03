@@ -26,9 +26,16 @@ namespace sdds {
         line(52,'-');
         cout << '+' << endl;
 
-        cout << "|  Daily Calorie Consumption";
-        line(25,' ');
-        cout << "|" << endl;
+        if(isValid()){
+            cout << "|  Daily Calorie Consumption";
+            line(25,' ');
+            cout << "|" << endl;
+        } else { 
+            cout << "| Invalid Calorie Consumption list";
+            line(18,' ');       
+            cout << " |" << endl;
+        }
+
 
         cout << '+';
         line(32,'-');
@@ -61,12 +68,18 @@ namespace sdds {
         line(12,'-');
         cout << '+' << endl;
 
-        int calorieTotal = totalCalorie();
-        cout << "|    Total Calories for today:";
-        cout.width(9);
-        cout << right << calorieTotal << " |";
-        line(12,' ');
-        cout << '|' << endl;
+        if(isValid()) {
+            int calorieTotal = totalCalorie();
+            cout << "|    Total Calories for today:";
+            cout.width(9);
+            cout << right << calorieTotal << " |";
+            line(12,' ');
+            cout << '|' << endl;
+        }else {
+            cout << "|    Invalid Calorie Consumption list";
+            line(15,' ');
+            cout << " |" << endl;
+        }
 
         cout << '+';
         line(52,'-');

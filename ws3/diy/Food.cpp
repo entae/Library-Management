@@ -71,7 +71,7 @@ namespace sdds {
     }
 
     bool Food::isValid()const {
-        return f_name[0] != '\0' && f_cal > 0;
+        return f_name[0] != '\0' && f_cal > 0 && f_when > 0;
     }
 
     int Food::calorieCount()const {
