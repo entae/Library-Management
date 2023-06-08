@@ -5,7 +5,7 @@
 // I have done all the coding by myself and only copied the code 
 // that my professor provided to complete my workshops and assignments.
 
- #define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <istream>
 #include <iomanip>
 #include "cstring.h"  // using strLen, strCpy and strCmp 
@@ -63,16 +63,16 @@ namespace sdds {
     }
 
     Canister::~Canister() {
-        delete[] m_contentName;
+        delete m_contentName;
         m_contentName = nullptr;
     }
     
     Canister& Canister::setContent(const char* contentName) {
-        if (!m_contentName || contentName[0] == '\0') {
+        if (contentName == nullptr) {
             m_usable = false;       //canister is unusable is the contentName is null
         } else if (isEmpty()) {
             setName(contentName);   //if canister is empty, it will set the name to contentName
-        } else if (strCmp(m_contentName, contentName)) {
+        } else if (!strCmp(m_contentName, contentName)) {
             m_usable = false;       //canister is unusable if the names are not the same
         }
         return *this;
