@@ -13,6 +13,7 @@
 using namespace std;
 namespace sdds {
 
+    //sets attributes to their default values
     void Canister::setToDefault() {
         m_contentName = nullptr;
         m_diameter =  10.0;     // in centimeters 
@@ -24,6 +25,7 @@ namespace sdds {
     void Canister::setName(const char *Cstr) {
         if (Cstr && m_usable) {
             delete[] m_contentName; // Delete the current content name if it exists
+            //allocates memory to the length of Cstr and copies into contentName
             m_contentName = new char[strLen(Cstr) + 1];
             strCpy(m_contentName, Cstr);
         }
@@ -34,7 +36,7 @@ namespace sdds {
     }
 
     //compares and checks m_contentNames; 
-    //returns true if names are the same
+    //returns true if names are the same and not null
     bool Canister::hasSameContent(const Canister& C)const {
         return m_contentName && C.m_contentName && 
         (strCmp(m_contentName, C.m_contentName) == 0);
@@ -51,7 +53,8 @@ namespace sdds {
 
     Canister::Canister(double height, double diameter, const char* contentName) {
         setToDefault();
-        // if argument values are within range, set the height and diameter to the argument
+        // if argument values are within range, 
+        //set the name, height and diameter to the respective arguments, and content to zero
         if ( (height >=10 && height <= 40) && (diameter >= 10 && diameter <= 30) ) {
                 m_height = height;
                 m_diameter = diameter;
@@ -73,12 +76,14 @@ namespace sdds {
         } else if (isEmpty()) {
             setName(contentName);   //if canister is empty, it will set the name to contentName
         } else if (!strCmp(m_contentName, contentName)) {
-            m_usable = false;       //canister is unusable if the names are not the same
+            m_usable = false;       //if the names are not the same, canister is unusable 
         }
         return *this;
     }
 
     Canister& Canister::pour(double quantity) {
+        //if the canister is usable && the quantity is > 0
+        // && the capacity will not overflow, the quantity is added to the canister
         if(m_usable && quantity && (quantity + volume()) <= capacity()) {
             m_contentVolume += quantity;
         } else {
@@ -88,17 +93,22 @@ namespace sdds {
     }
 
     Canister& Canister::pour(Canister& C) {
+        //resets and clears Canister so it can be used
         if (C.isEmpty()) {
             clear();
             setName(C.m_contentName);
         }
         else {
+            //sets the content name of the Canister argument
             setContent(C.m_contentName);
         }
+        //if volumes in both canisters will overflow
+        //pours from canister C into the other Canister upto capacity
         if ( C.volume() > (capacity() - volume() )) {
             C.m_contentVolume -= (capacity() - volume() );
             m_contentVolume = capacity();
         } else {
+            //if it will not overflow, all of canister C is poured into the other canister
             pour(C.m_contentVolume);
             C.m_contentVolume = 0.0;
         }
@@ -127,7 +137,7 @@ namespace sdds {
 
     double Canister::capacity()const {
         const double pi = 3.14159265;
-
+        //calculating capacity of canister (will fill up to 0.267 below the rim)
         return pi * (m_height - 0.267) * (m_diameter/2) * (m_diameter/2);
     }
 
