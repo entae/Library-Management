@@ -39,7 +39,7 @@ namespace sdds {
     //returns true if names are the same and not null
     bool Canister::hasSameContent(const Canister& C)const {
         return m_contentName && C.m_contentName && 
-        (strCmp(m_contentName, C.m_contentName) == 0);
+        strCmp(m_contentName, C.m_contentName) == 0;
     }
     
     Canister::Canister() {
@@ -55,7 +55,7 @@ namespace sdds {
         setToDefault();
         // if argument values are within range, 
         //set the name, height and diameter to the respective arguments, and content to zero
-        if ( (height >=10 && height <= 40) && (diameter >= 10 && diameter <= 30) ) {
+        if (height >=10 && height <= 40 && diameter >= 10 && diameter <= 30) {
                 m_height = height;
                 m_diameter = diameter;
                 m_contentVolume = 0.0;
@@ -66,7 +66,7 @@ namespace sdds {
     }
 
     Canister::~Canister() {
-        delete m_contentName;
+        delete[] m_contentName;
         m_contentName = nullptr;
     }
     
@@ -75,8 +75,8 @@ namespace sdds {
             m_usable = false;       //canister is unusable is the contentName is null
         } else if (isEmpty()) {
             setName(contentName);   //if canister is empty, it will set the name to contentName
-        } else if (!strCmp(m_contentName, contentName)) {
-            m_usable = false;       //if the names are not the same, canister is unusable 
+        } else if (strCmp(m_contentName, contentName)) {//if names are same returns 0
+            m_usable = false;       //if the names are not the same canister is unusable 
         }
         return *this;
     }
@@ -104,8 +104,8 @@ namespace sdds {
         }
         //if volumes in both canisters will overflow
         //pours from canister C into the other Canister upto capacity
-        if ( C.volume() > (capacity() - volume() )) {
-            C.m_contentVolume -= (capacity() - volume() );
+        if (C.volume() > (capacity() - volume() ) ) {
+            C.m_contentVolume -= capacity() - volume();
             m_contentVolume = capacity();
         } else {
             //if it will not overflow, all of canister C is poured into the other canister
