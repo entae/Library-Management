@@ -21,7 +21,7 @@ namespace sdds {
     void Label::setBorder(const char* frameArg) {
         if (frameArg && frameArg[0] != '\0') {
             delete[] l_border;
-            l_border = new char[strlen(frameArg) + 1];
+            l_border = new char[strLen(frameArg) + 1];
             strCpy(l_border, frameArg);
         }
     }
