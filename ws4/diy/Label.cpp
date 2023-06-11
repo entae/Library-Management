@@ -37,7 +37,7 @@ namespace sdds {
     void Label::readLabel() {
         char str[71];
         //reads a string up to 70 characters or until newline is read
-        cin.getline(str, 70, '\n');
+        cin.getline(str, 71, '\n');
         setLabel(str);
     }
   
