@@ -89,7 +89,7 @@ namespace sdds {
    Account& Account::operator=(Account& src) {
       //if instance is new && src is valid
       //copies src values into *this and src is set to zero
-      if (operator~() && (bool)src) {
+      if (operator~() && src) {
          m_number = src.m_number;
          m_balance = src.m_balance;
          src.m_number = 0;
@@ -141,7 +141,7 @@ namespace sdds {
    double operator+(const Account& A,const Account& B) {
       double sum = 0.0;
       //if instances A and B are both valid
-      if ((bool)A && (bool)B) {
+      if (A && B) {
          //double value is the sum of A and B's balances
          sum = (double)A + (double)B;
       }
