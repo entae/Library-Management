@@ -1,0 +1,7 @@
+workshop 6
+In Tae Chung, 128 958 220, itchung@myseneca.ca
+
+I found this workshop tricky when trying to format the operator overloads. Although I understood the basic rules for how the prototypes should look, it took me a lot more practice to try and get the return type, operator, and argument types correctly formatted. Especially for the binary operator overloads. 
+Similarly I had some trouble with implementing unary non-argument operators. for the operator ~(), used in the Account.cpp in the DIY part, I was not sure of how to use the overload so that I could use it as a condition for an if statement. Now with lots of trial and error, it seems a bit more intuitive to use the overloaded operators, but it was very confusing in the beginning trying to declare and define them, even with the OOP notes. 
+
+This workshop also helped me understand the importance of not making function names ambiguous. The setEmpty function in the lab part made me think that I was setting the instance into zero values, when in fact it was actually making it invalid. This resulted in me providing the wrong conditions for certain parts of the code and it took a fairly long time before I realized what the problem was. After reviewing what each type cast operator did, and becoming more familiar with what each condition needed, I was able to fix the code so that it worked.  
