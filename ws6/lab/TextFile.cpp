@@ -189,7 +189,7 @@ namespace sdds {
                 ostr << '=';
             }
             ostr << endl;
-            for (i = 0; i < m_noOfLines; i++) {
+            for (i = 0; i < (int)m_noOfLines; i++) {
                 ostr << m_textLines[i] << endl;
                 
                 if ((i+1) % m_pageSize == 0) {
