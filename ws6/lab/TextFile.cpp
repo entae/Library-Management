@@ -106,7 +106,7 @@ namespace sdds {
         if (fileName != nullptr) {
             ofstream newFile(fileName);
             if (newFile.is_open()) {
-               for (int i = 0; i < m_noOfLines; i++) {
+               for (unsigned int i = 0; i < m_noOfLines; i++) {
                 newFile << m_textLines[i] << endl;
                }
                newFile.close();
@@ -185,7 +185,7 @@ namespace sdds {
         if (*this) {
             unsigned int i;
             ostr << m_filename << endl;
-            for (i = 0; i < strlen(m_filename); i++) {
+            for (i = 0; i < strLen(m_filename); i++) {
                 ostr << '=';
             }
             ostr << endl;
