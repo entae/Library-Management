@@ -57,7 +57,7 @@ namespace sdds {
 
 // returns the length of the C-string in characters
     int strLen(const char* s) {
-      int len = 0;
+      unsigned int len = 0;
         while (s[len] != '\0')
             len++;
         return len;
