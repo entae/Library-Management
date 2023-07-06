@@ -183,7 +183,7 @@ namespace sdds {
 
     ostream& TextFile::view(ostream& ostr)const {
         if (*this) {
-            unsigned int i;
+            int i;
             ostr << m_filename << endl;
             for (i = 0; i < strLen(m_filename); i++) {
                 ostr << '=';
