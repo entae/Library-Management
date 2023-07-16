@@ -15,7 +15,8 @@ namespace sdds {
         int m_year;
     public:
         MotorVehicle(const char* licensePlate, int year);
-        void moveTo(const char* address);
+        virtual ~MotorVehicle();
+        virtual void moveTo(const char* address);
         std::ostream& write(std::ostream& os)const;
         std::istream& read(std::istream& in);
     };

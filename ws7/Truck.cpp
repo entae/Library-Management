@@ -8,12 +8,14 @@
 #include <iostream>
 
 #include "cstring.h"
+#include "MotorVehicle.h"
 #include "Truck.h"
 using namespace std;
 
 namespace sdds {
     Truck::Truck(const char* licensePlate, int year, double capacity, const char* address) : MotorVehicle(licensePlate, year), m_capacity(capacity), m_currentCargo(0.0) {
-        moveTo(address);
+        strnCpy(m_address, address, 63);
+        m_address[63] = '\0';
     }
 
     bool Truck::addCargo(double cargo) {

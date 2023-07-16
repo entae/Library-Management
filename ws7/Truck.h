@@ -14,7 +14,9 @@ namespace sdds {
         double t_capacity;
         double t_currentCargo;
     public:
+        //constructor
         Truck(const char* licensePlate, int year, double capacity, const char* address);
+        
         bool addCargo(double cargo);
         bool unloadCargo();
         std::ostream& write(std::ostream& os)const;
