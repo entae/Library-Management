@@ -21,7 +21,6 @@ namespace sdds {
         friend class Menu;
 
         char* m_item{nullptr};
-
         MenuItem(const char* value = nullptr); // set to empty state
         ~MenuItem();
         //delete copy constructor and copy assignment
