@@ -14,8 +14,10 @@
 #include <iomanip>
 #include <iostream>
 #include <ctime>
+
 using namespace std;
 #include "Date.h"
+
 namespace sdds {
    bool Date::validate() {
       errCode(NO_ERROR);
@@ -95,7 +97,7 @@ namespace sdds {
       if (is.fail()) {  
          errCode(CIN_FAILED);
          is.clear();
-         is.ignore(1000, '\n');
+         is.ignore(10000, '\n');
       } else {
         validate();
         is.clear(); 

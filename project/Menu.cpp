@@ -6,157 +6,160 @@
 // that my professor provided to complete my workshops and assignments.
 
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <string>
-#include <iomanip>
+#include<iomanip>
+#include <iostream> 
 #include <cstring>
-#include "Menu.h"
 
 using namespace std;
-namespace sdds {
+#include "Menu.h"
 
-//MenuItem Class methods:
-    MenuItem::MenuItem() {
-        m_item = nullptr;
-    }
-    
-    MenuItem::MenuItem(const char* value) {
-        if (value != nullptr && value[0] != '\0')
-		{
-			delete[] m_item;
-			m_item = new char[strlen(value) + 1];
-			strcpy(m_item, value);
-		}
-		else
-		{
-			delete[] m_item;
-			m_item = nullptr; // set to empty state
+namespace sdds 
+{
+	MenuItem::MenuItem() {
+		m_name = nullptr;
+	}
+
+	MenuItem::MenuItem(const char* name)
+	{
+		if (name) {
+			delete[] m_name;
+			m_name = new char[strlen(name) + 1];
+			strcpy(m_name, name);
+		} else {
+			delete[] m_name;
+			m_name = nullptr; 
 		}
 	}
 
-    MenuItem::~MenuItem() {
-        delete[] m_item;
-    }
-
-    MenuItem::operator bool()const {
-        return (m_item != nullptr && m_item[0] != '\0');
-    }
-
-    MenuItem::operator const char*() {
-        return m_item;
-    }
-
-    ostream& MenuItem::display(ostream& os)const {
-        if (*this) {
-            os << m_item;
-        }
-        return os;
-    }
-
-//Menu class methods:
-    Menu::Menu() {
-        setEmpty();
-    }
-
-    Menu::Menu(const char* title) {
-        if (title[0] != '\0') {
-            delete[] menu.m_item;
-            menu.m_item = new char[strlen(title +1)];
-            strcpy(menu.m_item, title);
-            m_numItems = 0;
-        } else {
-			delete[] menu.m_item;
-            setEmpty();
-		}
+	MenuItem::~MenuItem() {
+		delete[] m_name;
+		m_name = nullptr;
 	}
 
-    void Menu::setEmpty() {
-        menu.m_item = nullptr;
-        m_numItems = 0;
-    }
+	MenuItem::operator bool() const {
+		return (m_name != nullptr && m_name[0] != '\0');
+	}
 
-    Menu::~Menu() {
-        for (int i = 0; i < m_numItems; ++i)
-    }
 
-    ostream& Menu::displayTitle(ostream& os)const {
-        if (menu) {
-            os << menu.m_item;
-        } else {
-            os << "";
-        }
-        return os;
-    }
+	MenuItem::operator const char*() {
+		return m_name;
+	}
 
-    ostream& Menu::displayMenu(ostream& os)const {
-        if (menu) {
-			displayTitle(); 
-			os << ":" << endl;
+
+	ostream& MenuItem::display(ostream& os)const {
+		if (*this) {
+			os << m_name;
 		}
-		for (int i = 0; i < m_numItems; ++i) {
-			os << " " << setw(1) << right << i + 1;
-			os << "- ";
-			m_menuItems[i]->display();
-			os << endl;
-		}
-		os << " 0- Exit" << endl << "> ";
-	
 		return os;
 	}
 
-    unsigned int Menu::run()const {
-        unsigned int select;
-        displayMenu(cout);
-        bool valid = false;
-        while (!valid) {
-            cin >> select;
-            if (cin.fail() || select < 0 || select > m_numItems) {
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cout << "Invalid Selection, try again: ";
-            } else {
-                cin.ignore(10000, '\n');
-                valid = true;
-            }
-        }
-        return select;
-    }
+	Menu::Menu() {
+		menuName.m_name = nullptr;
+		numMenu = 0;
+	}
 
-    unsigned int Menu::operator~()const {
-        return run();
-    }
+	Menu::Menu(const char* name) {
+		if (name) {
+			delete[] menuName.m_name;
+			menuName.m_name = new char[strlen(name) + 1];
+			strcpy(menuName.m_name,name);
+			numMenu = 0;
+		} else {
+			delete[] menuName.m_name;
+			menuName.m_name = nullptr;
+			numMenu = 0;
+		}	
+	}
 
-    Menu& Menu::operator<<(const char* menuItemContent) {
-        if (m_numItems < MAX_MENU_ITEMS) {
-            MenuItem* content = new MenuItem(menuItemContent);
-            m_menuItems[m_numItems] = content;
-            ++m_numItems;
-        }
-        return *this;
-    }
+	Menu::~Menu() {
+		for (int i = 0; i < numMenu; ++i) {
+			delete menuArray[i];
+		}
+	}
 
-    Menu::operator int()const {
-        return m_numItems;
-    }
+	ostream& Menu::displayName(ostream& os)const {
+		if (menuName) {
+			os << menuName.m_name;
+		} else {
+			os << "";
+		}
+		return os;
+	}
 
-    Menu::operator unsigned int()const {
-        return m_numItems;
-    }
+	ostream& Menu::displayMenu(ostream& os)const {
+		if (menuName) {
+			displayName(); 
+			os << ":" << endl;
+		}
+		for (int i = 0; i < numMenu; ++i) {
+			os << " " << setw(1) << right << i + 1;
+			os << "- ";
+			menuArray[i]->display();
+			os << endl;
+		}
+		os << " 0- Exit" << endl << "> ";
+		return os;
+	}
 
-    Menu::operator bool()const {
-        return (m_numItems >= 1);
-    }
+	unsigned int Menu::operator~() {
+		int selection = run();
+		return selection;
+	}
 
-    const char* Menu::operator[](unsigned int index)const {
-        if (m_numItems > 0) {
-            int menuIndex = index % m_numItems;
-            return m_menuItems[menuIndex]->operator const char *();
-        }
-        return nullptr;
-    }
+	unsigned int Menu::run(istream& is) const {
+		int select;
+		int flag = 1;
+		displayMenu();
+		while (flag) {
+			if (!(is >> select) || select > numMenu || select < 0) {
+				is.clear();
+				is.ignore(200, '\n');
+				cout << "Invalid Selection, try again: ";
+			}
+			else{
+				is.ignore(200, '\n');
+				flag = 0;
+			}
+		}
+		return select;
+	}
 
-    ostream& operator<<(ostream& os, const Menu& menu) {
-        menu.displayTitle(os);
-        return os;
-    }
+	Menu& Menu::operator<<(const char* menuitemContent) {
+		if (numMenu < (int)MAX_MENU_ITEMS) {
+			menuArray[numMenu] = new MenuItem(menuitemContent);
+			numMenu++;
+		}
+		return *this;
+	}
+
+	Menu::operator int() const {
+		return numMenu;
+	}
+
+	Menu::operator unsigned int() const {
+		return numMenu;
+	}
+
+
+	Menu::operator bool() const {
+		return (numMenu >= 1);
+	}
+
+
+	ostream& operator<<(ostream& os, const Menu& aMenu) {
+		return aMenu.displayName(os);
+	}
+
+
+	const char* Menu::operator[](int size) const {
+		if (size < numMenu)
+		{
+			return (const char*)(*menuArray[size]);
+		}
+		else
+		{
+			int mod = size % numMenu;
+			return (const char*)(*menuArray[mod]);
+		}
+	}
 }
