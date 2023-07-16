@@ -86,19 +86,19 @@ namespace sdds {
 
 //implemented functions:
    istream& Date::read(istream& is = cin) {
-      m_ErrorCode = NO_ERROR;
+      errCode(NO_ERROR);
       is >> m_year;
       is.ignore();
       is >> m_mon;
       is.ignore();
       is >> m_day; 
       if (is.fail()) {
-         m_ErrorCode = CIN_FAILED;
+         m_ErrorCode(CIN_FAILED);
          is.clear();
-         is.ignore(10000, '\n');
+         is.ignore(1000, '\n');
       } else {
         validate();
-        is.ignore(10000, '\n'); 
+        is.clear 
       } 
       return is;
    }

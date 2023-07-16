@@ -19,8 +19,8 @@ namespace sdds {
     //A class that hold a text Item; (an option or title to be displayed) in a menu to be selected by the user. This is a fully private class that is only accessible by Menu (see next class)
     class MenuItem {
         friend class Menu;
-
         char* m_item{nullptr};
+        MenuItem();
         MenuItem(const char* value = nullptr); // set to empty state
         ~MenuItem();
         //delete copy constructor and copy assignment

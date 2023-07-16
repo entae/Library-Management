@@ -15,6 +15,10 @@ using namespace std;
 namespace sdds {
 
 //MenuItem Class methods:
+    MenuItem::MenuItem() {
+        m_item = nullptr;
+    }
+    
     MenuItem::MenuItem(const char* value) {
         if (value) {
             m_item = new char [strlen(value) + 1];
