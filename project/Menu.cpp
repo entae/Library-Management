@@ -18,7 +18,7 @@ namespace sdds {
     MenuItem::MenuItem() {
         m_item = nullptr;
     }
-
+    
     MenuItem::MenuItem(const char* value) {
         if (value) {
             m_item = new char [strlen(value) + 1];
@@ -39,11 +39,10 @@ namespace sdds {
         return &m_item[0];
     }
 
-    ostream& MenuItem::display(ostream& os)const {
-        if (*this) {
+    void MenuItem::display(ostream& os)const {
+        if (m_item) {
             os << m_item;
         }
-        return os;
     }
 
 //Menu class methods:
@@ -78,13 +77,13 @@ namespace sdds {
         m_numItems = 0;
     }
 
-    void Menu::displayTitle(ostream& os)const {
+    ostream& Menu::displayTitle(ostream& os)const {
         if (m_title) {
             os << m_title << ":" << endl;
         }
     }
 
-    void Menu::displayMenu(ostream& os)const {
+    ostream& Menu::displayMenu(ostream& os)const {
         displayTitle(os);
         for (unsigned int i = 0; i < m_numItems; i++) {
             os << " " << (i + 1) << "- ";
@@ -92,6 +91,7 @@ namespace sdds {
 			os << endl;
         }
         os << " 0- Exit" << endl << "> ";
+        return os;
     }
 
     unsigned int Menu::run()const {

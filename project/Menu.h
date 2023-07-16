@@ -28,7 +28,7 @@ namespace sdds {
         MenuItem& operator=(const Menu& source) = delete;
         operator bool()const;
         operator const char*()const; //when MenuItem is casted to "const char*", should return the address of the content Cstring
-        ostream& display(std::ostream& os)const;
+        void display(std::ostream& os)const;
     };
 
     class Menu {
@@ -41,8 +41,8 @@ namespace sdds {
         ~Menu();
         Menu(const Menu&) = delete;
         Menu& operator=(const Menu&) = delete;
-        void displayTitle(std::ostream& os)const;
-        void displayMenu(std::ostream& os)const;
+        std::ostream& displayTitle(std::ostream& os)const;
+        std::ostream& displayMenu(std::ostream& os)const;
         unsigned int run()const;
         unsigned int operator~()const;
         Menu& operator<<(const char* menuItemContent);
