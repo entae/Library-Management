@@ -8,6 +8,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include <cstring>
 #include "Menu.h"
 
@@ -20,80 +21,88 @@ namespace sdds {
     }
     
     MenuItem::MenuItem(const char* value) {
-        if (value) {
-            m_item = new char [strlen(value) + 1];
-            strcpy(m_item, value);
-        } else {
-            m_item = nullptr;
-        }
-    }
+        if (value != nullptr && value[0] != '\0')
+		{
+			delete[] m_item;
+			m_item = new char[strlen(value) + 1];
+			strcpy(m_item, value);
+		}
+		else
+		{
+			delete[] m_item;
+			m_item = nullptr; // set to empty state
+		}
+	}
+
     MenuItem::~MenuItem() {
         delete[] m_item;
     }
 
     MenuItem::operator bool()const {
+        return (m_item != nullptr && m_item[0] != '\0');
+    }
+
+    MenuItem::operator const char*() {
         return m_item;
     }
 
-    MenuItem::operator const char*()const {
-        return &m_item[0];
-    }
-
-    void MenuItem::display(ostream& os)const {
-        if (m_item) {
+    ostream& MenuItem::display(ostream& os)const {
+        if (*this) {
             os << m_item;
         }
+        return os;
     }
 
 //Menu class methods:
     Menu::Menu() {
-        m_title = nullptr;
-        m_numItems = 0;
-        for (unsigned int i = 0; i < MAX_MENU_ITEMS; ++i) {
-            m_menuItems[i] = nullptr;
-        }
+        setEmpty();
     }
 
     Menu::Menu(const char* title) {
-        if (title) {
-            m_title = new char[strlen(title +1)];
-            strcpy(m_title, title);
-        } 
-        m_numItems = 0;
-		for (unsigned int i = 0; i < MAX_MENU_ITEMS; ++i)
-		{
-			m_menuItems[i] = nullptr;
+        if (title[0] != '\0') {
+            delete[] menu.m_item;
+            menu.m_item = new char[strlen(title +1)];
+            strcpy(menu.m_item, title);
+            m_numItems = 0;
+        } else {
+			delete[] menu.m_item;
+            setEmpty();
 		}
 	}
 
-    Menu::~Menu() {
-        if (m_menuItems) {
-            for (unsigned int i = 0; i < m_numItems; ++i) {
-                delete m_menuItems[i];
-                m_menuItems[i] = nullptr;
-            }
-        }
-        delete[] m_title;
+    void Menu::setEmpty() {
+        menu.m_item = nullptr;
         m_numItems = 0;
     }
 
+    Menu::~Menu() {
+        for (int i = 0; i < m_numItems; ++i)
+    }
+
     ostream& Menu::displayTitle(ostream& os)const {
-        if (m_title) {
-            os << m_title << ":" << endl;
+        if (menu) {
+            os << menu.m_item;
+        } else {
+            os << "";
         }
         return os;
     }
 
     ostream& Menu::displayMenu(ostream& os)const {
-        displayTitle(os);
-        for (unsigned int i = 0; i < m_numItems; i++) {
-            os << " " << (i + 1) << "- ";
-			m_menuItems[i]->display(os);
+        if (menu) {
+			displayTitle(); 
+			os << ":" << endl;
+		}
+		for (int i = 0; i < m_numItems; ++i) {
+			os << " " << setw(1) << right << i + 1;
+			os << "- ";
+			m_menuItems[i]->display();
 			os << endl;
-        }
-        os << " 0- Exit" << endl << "> ";
-        return os;
-    }
+		}
+		os << " 0- Exit" << endl << "> ";
+	
+		return os;
+	}
 
     unsigned int Menu::run()const {
         unsigned int select;
@@ -135,7 +144,7 @@ namespace sdds {
     }
 
     Menu::operator bool()const {
-        return m_numItems > 0;
+        return (m_numItems >= 1);
     }
 
     const char* Menu::operator[](unsigned int index)const {

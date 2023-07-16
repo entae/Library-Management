@@ -19,26 +19,28 @@ namespace sdds {
     //A class that hold a text Item; (an option or title to be displayed) in a menu to be selected by the user. This is a fully private class that is only accessible by Menu (see next class)
     class MenuItem {
         friend class Menu;
-        char* m_item{nullptr};
+        char* m_item{};
         MenuItem();
-        MenuItem(const char* value = nullptr); // set to empty state
+        MenuItem(const char*); // set to empty state
+        void setEmpty();
         ~MenuItem();
         //delete copy constructor and copy assignment
         MenuItem(const Menu& source) = delete;
         MenuItem& operator=(const Menu& source) = delete;
         operator bool()const;
-        operator const char*()const; //when MenuItem is casted to "const char*", should return the address of the content Cstring
-        void display(std::ostream& os)const;
+        operator const char*(); //when MenuItem is casted to "const char*", should return the address of the content Cstring
+        ostream& display(std::ostream& os = std::cout)const;
     };
 
     class Menu {
-        char* m_title{nullptr};
-        MenuItem* m_menuItems[MAX_MENU_ITEMS] = {nullptr};
-        unsigned int m_numItems {0};
+        MenuItem menu;
+        MenuItem* m_menuItems[MAX_MENU_ITEMS]{};
+        unsigned int m_numItems;
     public:
         Menu();
         Menu(const char* title);
         ~Menu();
+        void setEmpty();
         Menu(const Menu&) = delete;
         Menu& operator=(const Menu&) = delete;
         std::ostream& displayTitle(std::ostream& os)const;
