@@ -22,6 +22,10 @@ namespace sdds {
         m_year = year;
     }
 
+    MotorVehicle::~MotorVehicle() {
+        
+    }
+
     void MotorVehicle::moveTo(const char* address) {
         if (strCmp(m_address, address) != 0) {
             //license plate

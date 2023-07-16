@@ -8,6 +8,8 @@
 #ifndef SDDS_TRUCK_H_
 #define SDDS_TRUCK_H_
 
+#include "MotorVehicle.h"
+
 namespace sdds {
     class Truck : public MotorVehicle {
         //attributes are in kg
@@ -16,7 +18,7 @@ namespace sdds {
     public:
         //constructor
         Truck(const char* licensePlate, int year, double capacity, const char* address);
-        
+        virtual ~Truck();
         bool addCargo(double cargo);
         bool unloadCargo();
         std::ostream& write(std::ostream& os)const;

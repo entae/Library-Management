@@ -7,15 +7,16 @@
 
 #include <iostream>
 
-#include "cstring.h"
-#include "MotorVehicle.h"
 #include "Truck.h"
+#include "cstring.h"
 using namespace std;
 
 namespace sdds {
-    Truck::Truck(const char* licensePlate, int year, double capacity, const char* address) : MotorVehicle(licensePlate, year), m_capacity(capacity), m_currentCargo(0.0) {
-        strnCpy(m_address, address, 63);
-        m_address[63] = '\0';
+    Truck::Truck(const char* licensePlate, int year, double capacity, const char* address) : MotorVehicle(licensePlate, year), t_capacity(capacity), t_currentCargo(0.0) {
+    }
+
+    Truck::~Truck(){
+        
     }
 
     bool Truck::addCargo(double cargo) {
@@ -48,7 +49,7 @@ namespace sdds {
         cout << "Capacity: ";
         in >> t_capacity;
         cout << "Cargo: ";
-        in >> "t_currentCargo";
+        in >> t_currentCargo;
 
         return in;
     }
