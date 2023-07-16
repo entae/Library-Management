@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include "Menu.h"
+#include "Utils.h"
 
 using namespace std;
 namespace sdds {
@@ -16,8 +17,8 @@ namespace sdds {
 //MenuItem Class methods:
     MenuItem::MenuItem(const char* value) {
         if (value != nullptr) {
-            m_item = new char [strlen(value) + 1];
-            strcpy(m_item, value);
+            m_item = new char [strLen(value) + 1];
+            strCpy(m_item, value);
         } else {
             m_item = new char[1];
             m_item[0] = '\0';
@@ -51,8 +52,8 @@ namespace sdds {
 
     Menu::Menu(const char* title) {
         if (title) {
-            m_title = new char[strlen(title +1)];
-            strcpy(m_title, title);
+            m_title = new char[strLen(title +1)];
+            strCpy(m_title, title);
         } else {
             m_title = nullptr;
         }
