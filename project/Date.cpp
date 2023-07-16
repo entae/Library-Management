@@ -5,7 +5,7 @@
 // Author	Fardad Soleimanloo
 // Revision History
 // -----------------------------------------------------------
-// Name: In Tae Chung,  Date: July 14, 2023     Reason
+// Name: In Tae Chung,  Date: July 15, 2023     Reason
 // 128 958 220 ; itchung@myseneca.ca
 // I have done all the coding by myself and only copied the code 
 // that my professor provided to complete my workshops and assignments.
@@ -93,9 +93,9 @@ namespace sdds {
       is.ignore();
       is >> m_day; 
       if (is.fail()) {
+         m_ErrorCode = CIN_FAILED;
          is.clear();
          is.ignore(1000, '\n');
-         m_ErrorCode = CIN_FAILED;
       } else {
         validate();
         is.ignore(1000, '\n'); 
@@ -150,11 +150,11 @@ namespace sdds {
       return m_ErrorCode == NO_ERROR;
    }
 //Helper Functions
-   std::ostream& operator<<(std::ostream& os, const Date& RO) {
+   ostream& operator<<(ostream& os, const Date& RO) {
       return RO.write(os);
    }
    
-   std::istream& operator>>(std::istream& is, Date& RO) {
+   istream& operator>>(istream& is, Date& RO) {
       return RO.read(is);
    }
 }
