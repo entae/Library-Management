@@ -59,7 +59,7 @@ namespace sdds {
 		std::ostream& displayMenu(std::ostream& os = std::cout)const;
 	
 		
-		// foolproof function run (¿‘∑¬ ¿Ø»øº∫ ∞ÀªÁ)
+		// foolproof function run
 		unsigned int run(std::istream& is = std::cin)const; 
 		unsigned int operator~();
 
