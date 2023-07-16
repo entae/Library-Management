@@ -94,10 +94,10 @@ namespace sdds {
             cin >> select;
             if (cin.fail() || select < 0 || select > m_numItems) {
                 cin.clear();
-                cin.ignore(1000, '\n');
+                cin.ignore(10000, '\n');
                 cout << "Invalid Selection, try again: ";
             } else {
-                cin.ignore(1000, '\n');
+                cin.ignore(10000, '\n');
                 valid = true;
             }
         }

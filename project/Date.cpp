@@ -95,10 +95,10 @@ namespace sdds {
       if (is.fail()) {
          m_ErrorCode = CIN_FAILED;
          is.clear();
-         is.ignore(1000, '\n');
+         is.ignore(10000, '\n');
       } else {
         validate();
-        is.ignore(1000, '\n'); 
+        is.ignore(10000, '\n'); 
       } 
       return is;
    }
