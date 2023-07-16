@@ -55,9 +55,9 @@ namespace sdds {
       int currentYear()const;         // returns the m_CUR_YEAR attribute value;
 
 //functions to implement:
-      std::istream& read(std::istream& is = std::cin);   //reads a date from the console in the following format YYYY/MM/DD
+      std::istream& read(std::istream& is);   //reads a date from the console in the following format YYYY/MM/DD
 
-      std::ostream& write(std::ostream& os = std::cout)const;  //If the Date object is in a "bad" state (is invalid) print the "dateStatus()". Otherwise, the function writes the date in the specified format using ostream.
+      std::ostream& write(std::ostream& os)const;  //If the Date object is in a "bad" state (is invalid) print the "dateStatus()". Otherwise, the function writes the date in the specified format using ostream.
 
       bool operator==(const Date& d)const;
       bool operator!=(const Date& d)const;
@@ -72,7 +72,7 @@ namespace sdds {
 
       operator bool()const; //return true if the date is valid and false if not
    };
-   
+
    std::ostream& operator<<(std::ostream& os, const Date& RO);
    std::istream& operator>>(std::istream& is, Date& RO);
    //Overloads of insertion and extraction operators to call write and read method of Date

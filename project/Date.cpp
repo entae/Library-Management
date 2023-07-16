@@ -127,7 +127,7 @@ namespace sdds {
       return daysSince0001_1_1() != d.daysSince0001_1_1();
    }
    bool Date::operator>=(const Date& d)const {
-      daysSince0001_1_1() >= d.daysSince0001_1_1();
+      return daysSince0001_1_1() >= d.daysSince0001_1_1();
    }
 
    bool Date::operator<=(const Date& d)const {
