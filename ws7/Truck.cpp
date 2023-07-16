@@ -22,12 +22,13 @@ namespace sdds {
 
     bool Truck::addCargo(double cargo) {
         bool changed = false;
-        if (t_capacity >= t_currentCargo && cargo > 0) {
-            t_currentCargo += cargo;
+        if (t_currentCargo < t_capacity) {
+            if (cargo < (t_capacity - t_currentCargo)) {
+                t_currentCargo += cargo;
+            } else {
+                t_currentCargo = t_capacity;
+            }
             changed = true;
-        } 
-        if (t_currentCargo > t_capacity) {
-            t_currentCargo = t_capacity;
         }
         return changed;
     }
