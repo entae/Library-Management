@@ -1,0 +1,135 @@
+// In Tae Chung
+// itchung@myseneca.ca
+// 128 958 220
+// Finish Date: July 14, 2023 
+// I have done all the coding by myself and only copied the code 
+// that my professor provided to complete my workshops and assignments.
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <string>
+#include "Menu.h"
+
+using namespace std;
+namespace sdds {
+
+//MenuItem Class methods:
+    MenuItem::MenuItem(const char* value) {
+        if (value != nullptr) {
+            m_item = new char [strlen(value) + 1];
+            strcpy(m_item, value);
+        } else {
+            m_item = new char[1];
+            m_item[0] = '\0';
+        }
+    }
+    MenuItem::~MenuItem() {
+        delete[] m_item;
+    }
+
+    MenuItem::operator bool()const {
+        return m_item != nullptr;
+    }
+
+    MenuItem::operator const char*()const {
+        return m_item;
+    }
+
+    void MenuItem::display(ostream& os)const {
+        if (m_item != nullptr) {
+            os << m_item;
+        }
+    }
+
+//Menu class methods:
+    Menu::Menu() {
+        m_numItems = 0;
+        for (unsigned int i = 0; i < MAX_MENU_ITEMS; ++i) {
+            m_menuItems[i] = nullptr;
+        }
+    }
+
+    Menu::Menu(const char* title) {
+        if (title) {
+            m_title = new char[strlen(title +1)];
+            strcpy(m_title, title);
+        } else {
+            m_title = nullptr;
+        }
+    }
+
+    Menu::~Menu() {
+        if (m_menuItems) {
+            for (unsigned int i = 0; i < m_numItems; ++i) {
+                delete m_menuItems[i];
+                m_menuItems[i] = nullptr;
+            }
+        }
+        delete[] m_title;
+        m_numItems = 0;
+    }
+
+    void Menu::displayTitle(ostream& os)const {
+        if (m_title) {
+            os << m_title << ":\n";
+        }
+    }
+
+    void Menu::displayMenu(ostream& os)const {
+        displayTitle(os);
+        for (unsigned int i = 0; i < m_numItems; ++i) {
+            os << right << os.width(2) << (i + 1) << "- ";
+            m_menuItems[i]->display(os);
+            os << endl;
+        }
+        os << " 0- Exit" << endl << "> ";
+    }
+
+    unsigned int Menu::run()const {
+        unsigned int select;
+        displayMenu(cout);
+        bool valid = false;
+        while (!valid) {
+            cin >> select;
+            if (cin.fail() || select < 0 || select > m_numItems) {
+                cin.clear();
+                cin.ignore(1000, '\n');
+                cout << "Invalid Selection, try again: ";
+            } else {
+                cin.ignore(1000, '\n');
+                valid = true;
+            }
+        }
+        return select;
+    }
+
+    unsigned int Menu::operator~() {
+        return run();
+    }
+
+    Menu& Menu::operator<<(const char* menuItemContent) {
+        if (m_numItems < MAX_MENU_ITEMS) {
+            MenuItem* content = new MenuItem(menuItemContent);
+            m_menuItems[m_numItems] = content;
+            ++m_numItems;
+        }
+        return *this;
+    }
+
+    Menu::operator int()const {
+        return m_numItems;
+    }
+
+    Menu::operator unsigned int()const {
+        return m_numItems;
+    }
+
+    Menu::operator bool()const {
+        return m_numItems > 0;
+    }
+
+    ostream& operator<<(ostream& os, const Menu& menu) {
+        menu.displayTitle(os);
+        return os;
+    }
+}

@@ -18,8 +18,7 @@ namespace sdds {
       double totalTax()const;   // returns the total tax applied to the Items
       double totalPrice()const;  // returns the sum of prices of Items
       void Title()const;       // Prints the title of the shopping list
-            // prints the footer containing total tax, price and total price after tax
-      void footer()const;
+      void footer()const;    // prints the footer containing total tax, price and total price after tax
       void setEmpty();     // sets the Bill to an emtpy state
       bool isValid()const;  // returns true is the Bill and all of its Items are valid
    

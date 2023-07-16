@@ -63,8 +63,7 @@ namespace sdds {
             line(20,'x');
             cout << " | ";
             line(7,'x');
-            cout << " | ";
-            cout << "xxx |" << endl;
+            cout << " | xxx |" << endl;
         }
     }
 
