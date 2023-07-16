@@ -103,7 +103,7 @@ namespace sdds {
         return select;
     }
 
-    unsigned int Menu::operator~() {
+    unsigned int Menu::operator~()const {
         return run();
     }
 
@@ -126,6 +126,14 @@ namespace sdds {
 
     Menu::operator bool()const {
         return m_numItems > 0;
+    }
+
+    const char* Menu::operator[](unsigned int index)const {
+        if (m_numItems > 0) {
+            int menuIndex = index % m_numItems;
+            return m_menuItems[menuIndex]->m_item;
+        }
+        return nullptr;
     }
 
     ostream& operator<<(ostream& os, const Menu& menu) {

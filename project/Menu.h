@@ -8,9 +8,11 @@
 #ifndef SDDS_MENU_H__
 #define SDDS_MENU_H__
 #include <iostream>
+
 namespace sdds {
 
     const int MAX_MENU_ITEMS = 20;
+
     //A class that has several MenuItems to be displayed so the user can select one of them for an action to be executed in the program
     class Menu;
 
@@ -43,11 +45,12 @@ namespace sdds {
         void displayTitle(std::ostream& os)const;
         void displayMenu(std::ostream& os)const;
         unsigned int run()const;
-        unsigned int operator~();
+        unsigned int operator~()const;
         Menu& operator<<(const char* menuItemContent);
         operator int()const;
         operator unsigned int()const;
         operator bool()const;
+        const char* operator[](unsigned int index)const;
     };
     std::ostream& operator<<(std::ostream& os, const Menu& menu);
 }

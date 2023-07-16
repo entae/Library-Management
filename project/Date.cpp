@@ -94,7 +94,7 @@ namespace sdds {
       is >> m_day; 
       if (is.fail()) {
          is.clear();
-         is.ignore();
+         is.ignore(1000, '\n');
          m_ErrorCode = CIN_FAILED;
       } else {
         validate();

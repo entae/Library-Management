@@ -13,6 +13,7 @@
 #ifndef SDDS_DATE_H__
 #define SDDS_DATE_H__
 #include <iostream>
+
 namespace sdds {
    const int NO_ERROR = 0;
    const int CIN_FAILED = 1;
@@ -52,8 +53,10 @@ namespace sdds {
       int errCode()const;         // returns the error code or zero if date is valid
       const char* dateStatus()const;  // returns a string corresponding the current status of the date
       int currentYear()const;         // returns the m_CUR_YEAR attribute value;
+
 //functions to implement:
       std::istream& read(std::istream& is = std::cin);   //reads a date from the console in the following format YYYY/MM/DD
+
       std::ostream& write(std::ostream& os = std::cout)const;  //If the Date object is in a "bad" state (is invalid) print the "dateStatus()". Otherwise, the function writes the date in the specified format using ostream.
 
       bool operator==(const Date& d)const;
@@ -63,10 +66,13 @@ namespace sdds {
       bool operator<(const Date& d)const;
       bool operator>(const Date& d)const;
       //Use the return value of the daysSince0001_1_1() method to compare the two dates
+
       int operator-(const Date& d)const;
       //Returns the difference between two Dates in days
+
       operator bool()const; //return true if the date is valid and false if not
    };
+   
    std::ostream& operator<<(std::ostream& os, const Date& RO);
    std::istream& operator>>(std::istream& is, Date& RO);
    //Overloads of insertion and extraction operators to call write and read method of Date
