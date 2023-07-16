@@ -13,18 +13,22 @@ using namespace std;
 
 namespace sdds {
     Truck::Truck(const char* licensePlate, int year, double capacity, const char* address) : MotorVehicle(licensePlate, year), t_capacity(capacity), t_currentCargo(0.0) {
+        moveTo(address);
     }
 
     Truck::~Truck(){
-        
+
     }
 
     bool Truck::addCargo(double cargo) {
         bool changed = false;
-        if (cargo <= (t_capacity - t_currentCargo)) {
+        if (t_capacity >= t_currentCargo && cargo > 0) {
             t_currentCargo += cargo;
             changed = true;
         } 
+        if (t_currentCargo > t_capacity) {
+            t_currentCargo = t_capacity;
+        }
         return changed;
     }
 

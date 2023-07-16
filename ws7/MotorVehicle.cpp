@@ -23,15 +23,15 @@ namespace sdds {
     }
 
     MotorVehicle::~MotorVehicle() {
-        
+
     }
 
     void MotorVehicle::moveTo(const char* address) {
         if (strCmp(m_address, address) != 0) {
             //license plate
-            cout << "| " << right;
+            cout << "|" << right;
             cout.width(8);
-            cout << m_licensePlate << " | ";
+            cout << m_licensePlate << "| |";
             
             //current address
             cout.width(20);
@@ -40,7 +40,7 @@ namespace sdds {
             //new address
             cout << left;
             cout.width(20);
-            cout << address << endl;
+            cout << address << "|" << endl;
             strnCpy(m_address, address, 63);
             m_address[63] = '\0';
         }
