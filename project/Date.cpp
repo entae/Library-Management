@@ -92,13 +92,13 @@ namespace sdds {
       is >> m_mon;
       is.ignore();
       is >> m_day; 
-      if (is.fail()) {
-         m_ErrorCode(CIN_FAILED);
+      if (is.fail()) {  
+         errCode(CIN_FAILED);
          is.clear();
          is.ignore(1000, '\n');
       } else {
         validate();
-        is.clear 
+        is.clear(); 
       } 
       return is;
    }
