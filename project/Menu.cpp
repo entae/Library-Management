@@ -81,6 +81,7 @@ namespace sdds {
         if (m_title) {
             os << m_title << ":" << endl;
         }
+        return os;
     }
 
     ostream& Menu::displayMenu(ostream& os)const {
