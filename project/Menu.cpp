@@ -74,16 +74,16 @@ namespace sdds {
 
     void Menu::displayTitle(ostream& os)const {
         if (m_title) {
-            os << m_title << ":\n";
+            os << m_title << ":" << endl;
         }
     }
 
     void Menu::displayMenu(ostream& os)const {
         displayTitle(os);
-        for (unsigned int i = 0; i < m_numItems; ++i) {
-            os << right << os.width(2) << (i + 1) << "- ";
-            m_menuItems[i]->display(os);
-            os << endl;
+        for (unsigned int i = 0; i < m_numItems; i++) {
+            os << " " << (i + 1) << "- ";
+			m_menuItems[i]->display(os);
+			os << endl;
         }
         os << " 0- Exit" << endl << "> ";
     }
