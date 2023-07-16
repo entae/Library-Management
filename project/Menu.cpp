@@ -28,7 +28,7 @@ namespace sdds {
     }
 
     MenuItem::operator bool()const {
-        return m_item != nullptr;
+        return m_item;
     }
 
     MenuItem::operator const char*()const {
@@ -43,6 +43,7 @@ namespace sdds {
 
 //Menu class methods:
     Menu::Menu() {
+        m_title = nullptr;
         m_numItems = 0;
         for (unsigned int i = 0; i < MAX_MENU_ITEMS; ++i) {
             m_menuItems[i] = nullptr;
@@ -134,7 +135,7 @@ namespace sdds {
     const char* Menu::operator[](unsigned int index)const {
         if (m_numItems > 0) {
             int menuIndex = index % m_numItems;
-            return m_menuItems[menuIndex]->m_item;
+            return m_menuItems[menuIndex]->operator const char *();
         }
         return nullptr;
     }
