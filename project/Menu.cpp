@@ -32,11 +32,11 @@ namespace sdds {
     }
 
     MenuItem::operator const char*()const {
-        return m_item;
+        return &m_item[0];
     }
 
     void MenuItem::display(ostream& os)const {
-        if (m_item != nullptr) {
+        if (m_item) {
             os << m_item;
         }
     }
