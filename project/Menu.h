@@ -31,7 +31,7 @@ namespace sdds {
 		//const char* type conversion
 		operator const char* ();
 		//display the content of the MenuItem on ostream
-		std::ostream& display(std::ostream& os = std::cout)const;
+		std::ostream& display(std::ostream& os)const;
 
 		friend class Menu;
 	};
@@ -54,13 +54,13 @@ namespace sdds {
 		//destructor
 		~Menu();
 		// Display the title of the Menu on ostream
-		std::ostream& displayName(std::ostream& os = std::cout)const;
+		std::ostream& displayName(std::ostream& os)const;
 		// Display the entire Menu on ostream
-		std::ostream& displayMenu(std::ostream& os = std::cout)const;
+		std::ostream& displayMenu(std::ostream& os)const;
 	
 		
 		// foolproof function run
-		unsigned int run(std::istream& is = std::cin)const; 
+		unsigned int run(std::istream& is)const; 
 		unsigned int operator~();
 
 		//overload to add a MenuItem to the Menu

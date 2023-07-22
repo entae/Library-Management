@@ -45,7 +45,7 @@ namespace sdds
 	}
 
 
-	ostream& MenuItem::display(ostream& os)const {
+	ostream& MenuItem::display(ostream& os = cout)const {
 		if (*this) {
 			os << m_name;
 		}
@@ -76,7 +76,7 @@ namespace sdds
 		}
 	}
 
-	ostream& Menu::displayName(ostream& os)const {
+	ostream& Menu::displayName(ostream& os = cout)const {
 		if (menuName) {
 			os << menuName.m_name;
 		} else {
@@ -85,7 +85,7 @@ namespace sdds
 		return os;
 	}
 
-	ostream& Menu::displayMenu(ostream& os)const {
+	ostream& Menu::displayMenu(ostream& os = cout)const {
 		if (menuName) {
 			displayName(); 
 			os << ":" << endl;
@@ -105,7 +105,7 @@ namespace sdds
 		return selection;
 	}
 
-	unsigned int Menu::run(istream& is) const {
+	unsigned int Menu::run(istream& is = cin) const {
 		int select;
 		int flag = 1;
 		displayMenu();
