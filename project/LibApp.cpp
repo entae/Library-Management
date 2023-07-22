@@ -67,7 +67,7 @@ namespace sdds {
 
     void LibApp::checkOutPub() {
         search();
-        bool confirmed = confirm("Check out publication");
+        bool confirmed = confirm("Check out publication?");
         if (confirmed) {
             m_changed = true;
             cout << "Publication checked out" << endl;
