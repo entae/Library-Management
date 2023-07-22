@@ -7,6 +7,7 @@
 
 #ifndef SDDS_MENU_H_
 #define SDDS_MENU_H_
+#include <iostream>
 
 namespace sdds {
 
