@@ -88,7 +88,7 @@ namespace sdds
 	ostream& Menu::displayMenu(ostream& os = cout)const {
 		if (menuName) {
 			displayName(); 
-			os << ":" << endl;
+			os << endl;
 		}
 		for (int i = 0; i < numMenu; ++i) {
 			os << " " << setw(1) << right << i + 1;
