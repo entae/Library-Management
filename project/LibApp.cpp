@@ -76,7 +76,7 @@ namespace sdds {
     }
 
     //constructor
-    LibApp::LibApp() : m_mainMenu("Seneca Library Application\n"), m_exitMenu("Changes have been made to the data, what would you like to do?\n") {
+    LibApp::LibApp() : m_mainMenu(""), m_exitMenu("Changes have been made to the data, what would you like to do?") {
         m_changed = false;
 
         //populating mainMenu + exitMenu with 'operator<<'
