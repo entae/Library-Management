@@ -51,7 +51,7 @@ namespace sdds {
       m_year = lt.tm_year + 1900;
       errCode(NO_ERROR);
    }
-   int Date::daysSince0001_1_1()const { // Rata Die day since 0001/01/01 
+   int Date::daysSince0001_1_1()const { //day since 0001/01/01 
       int ty = m_year;
       int tm = m_mon;
       if (tm < 3) {
@@ -61,7 +61,7 @@ namespace sdds {
       return 365 * ty + ty / 4 - ty / 100 + ty / 400 + (153 * tm - 457) / 5 + m_day - 306;
    }
 //public:
-   Date::Date() :m_CUR_YEAR(systemYear()) {
+   Date::Date() : m_CUR_YEAR(systemYear()) {
       setToToday();
    }
    Date::Date(int year, int mon, int day) : m_CUR_YEAR(systemYear()) {
@@ -87,7 +87,7 @@ namespace sdds {
    }
 
 //implemented functions:
-   istream& Date::read(istream& is = cin) {
+   istream& Date::read(istream& is) {
       errCode(NO_ERROR);
       is >> m_year;
       is.ignore();
@@ -105,7 +105,7 @@ namespace sdds {
       return is;
    }
 
-   ostream& Date::write(ostream& os = cout)const {
+   ostream& Date::write(ostream& os)const {
       if (bad()) {
          os << dateStatus();
       } else {

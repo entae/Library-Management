@@ -33,7 +33,6 @@ namespace sdds
 
 	MenuItem::~MenuItem() {
 		delete[] m_name;
-		m_name = nullptr;
 	}
 
 	MenuItem::operator bool() const {

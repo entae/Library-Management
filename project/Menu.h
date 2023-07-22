@@ -18,7 +18,7 @@ namespace sdds {
 	{
 		char* m_name{}; // cstring of characters for the content of the menu item dynamically
 		
-		//constructor
+		//constructors
 		MenuItem();
 		MenuItem(const char*);
 		//copy constructor and copy assignment deleted
@@ -43,7 +43,7 @@ namespace sdds {
 		MenuItem menuName;
 		MenuItem* menuArray[MAX_MENU_ITEMS]{};
 		int numMenu;
-		
+		//copy constructor and copy assignment deleted
 		Menu(const Menu& src) = delete;
 		Menu& operator=(const Menu& src) = delete;
 
@@ -63,13 +63,17 @@ namespace sdds {
 		unsigned int run(std::istream& is = std::cin)const; 
 		unsigned int operator~();
 
+		//overload to add a MenuItem to the Menu
 		Menu& operator<<(const char* menuitemContent);
 		
+		//int and unsigned int overloads to return the number of MenuItems on the Menu
 		operator int() const;
 		operator unsigned int() const;
 
+		//bool type conversion, returns true if Menu has 1 or more MenuItems
 		operator bool() const;
 
+		//indexing operator, returns the const char* cast of corresponding MenuItem in the array of MenuItem pointers.
 		const char* operator[](int) const;
 	};
 

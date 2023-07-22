@@ -55,26 +55,44 @@ namespace sdds {
       int currentYear()const;         // returns the m_CUR_YEAR attribute value;
 
 //functions to implement:
-      std::istream& read(std::istream& is);   //reads a date from the console in the following format YYYY/MM/DD
+      /**
+      * reads a date from the console in the following format YYYY/MM/DD
+      * @param is - input instance to gather year,mon,day
+      * @returns - formatted istream instance
+      */
+      std::istream& read(std::istream& is = cin); 
 
-      std::ostream& write(std::ostream& os)const;  //If the Date object is in a "bad" state (is invalid) print the "dateStatus()". Otherwise, the function writes the date in the specified format using ostream.
+      /**
+      * If the Date object is in a "bad" state (is invalid) print the "dateStatus()". 
+      * Otherwise, the function writes the date in the specified format using ostream.
+      * @param os - ostream set to print formatted YYYY/MM/DD
+      * @returns - formatted ostream instance
+      */
+      std::ostream& write(std::ostream& os = cout)const;  
 
+      //Use the return value of the daysSince0001_1_1() method to compare the two dates
       bool operator==(const Date& d)const;
       bool operator!=(const Date& d)const;
       bool operator>=(const Date& d)const;
       bool operator<=(const Date& d)const;
       bool operator<(const Date& d)const;
       bool operator>(const Date& d)const;
-      //Use the return value of the daysSince0001_1_1() method to compare the two dates
 
+      /**
+      * Returns the difference between two Dates in days
+      * @param d - date being subtracted from after comparing to daysSince0001_1_1();
+      * @returns - difference in days 
+      */
       int operator-(const Date& d)const;
-      //Returns the difference between two Dates in days
 
-      operator bool()const; //return true if the date is valid and false if not
+      //return true if the date is valid and false if not
+      operator bool()const; 
+
    };
 
+   //Overloads of insertion and extraction operators to call write and read method of Date
    std::ostream& operator<<(std::ostream& os, const Date& RO);
    std::istream& operator>>(std::istream& is, Date& RO);
-   //Overloads of insertion and extraction operators to call write and read method of Date
+
 }
 #endif // !SDDS_DATE_H__
