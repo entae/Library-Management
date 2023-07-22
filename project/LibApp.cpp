@@ -91,58 +91,73 @@ namespace sdds {
         load();
     }
 
-    void LibApp::run() {
-        int inputMenu, inputExit;
-        bool continueRun = true;
-
-        while (continueRun) {
-            inputMenu = m_mainMenu.run(cin);
-            switch (inputMenu) {
-                case 0:
-                    if (m_changed == true) {
-                        inputExit = m_exitMenu.run(cin);
-                        switch (inputExit) {
-                            case 0:
-                                if (confirm("This will discard all the changes are you sure?")) {
-                                    m_changed = false;
-                                }
-                            break;
-
-                            case 1:
-                                save();
-                            break;
-
-                            case 2:
-                                inputMenu = 1;
-                            break;
-                        }
-                    }
-                    cout << endl;
-                break;
-
-                case 1:
-                    newPublication();
-                break;
-
-                case 2:
-                    removePublication();
-                break;
-                
-                case 3:
-                    checkOutPub();
-                break;
-
-                case 4:
-                    returnPub();
-                break;
-                
-                default:
-                    continueRun = false;
-                break;
-            }
+    void LibApp::checkOutPub()
+    {
+        search();
+        bool confirmed = confirm("Check out publication?");
+        if (confirmed)
+        {
+            m_changed = true;
+            std::cout << "Publication checked out" << std::endl;
         }
-        cout << "-------------------------------------------" << endl;
-        cout << "Thanks for using Seneca Library Application" << endl;
+        std::cout << std::endl;
     }
+
+    void LibApp::run()
+    {
+        int inputMenu, inputExit;
+
+        do
+        {
+            inputMenu = m_mainMenu.run(cin);
+            switch (inputMenu)
+            {
+            case 0:
+                if (m_changed == true)
+                {
+                    inputExit = m_exitMenu.run(cin);
+                    switch (inputExit)
+                    {
+                    case 0:
+                        if (confirm("This will discard all the changes are you sure?"))
+                        {
+                            m_changed = false;
+                        }
+                    break;
+
+                    case 1:
+                        save();
+                    break;
+                    
+                    case 2:
+                        inputMenu = 1;
+                    break;
+                    }
+                }
+                cout << endl;
+            break;
+
+            case 1:
+                newPublication();
+            break;
+            
+            case 2:
+                removePublication();
+            break;
+            
+            case 3:
+                checkOutPub();
+            break;
+            
+            case 4:
+                returnPub();
+            break;
+            }
+        } while (inputMenu != 0);
+
+        std::cout << "-------------------------------------------" << std::endl;
+        std::cout << "Thanks for using Seneca Library Application" << std::endl;
+    }
+}
 
 }
