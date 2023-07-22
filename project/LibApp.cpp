@@ -91,18 +91,6 @@ namespace sdds {
         load();
     }
 
-    void LibApp::checkOutPub()
-    {
-        search();
-        bool confirmed = confirm("Check out publication?");
-        if (confirmed)
-        {
-            m_changed = true;
-            std::cout << "Publication checked out" << std::endl;
-        }
-        std::cout << std::endl;
-    }
-
     void LibApp::run()
     {
         int inputMenu, inputExit;
@@ -158,6 +146,4 @@ namespace sdds {
         std::cout << "-------------------------------------------" << std::endl;
         std::cout << "Thanks for using Seneca Library Application" << std::endl;
     }
-}
-
 }
