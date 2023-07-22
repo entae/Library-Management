@@ -101,7 +101,7 @@ namespace sdds
 	}
 
 	unsigned int Menu::operator~() {
-		int selection = run();
+		int selection = run(cin);
 		return selection;
 	}
 

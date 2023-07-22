@@ -5,8 +5,8 @@
 // I have done all the coding by myself and only copied the code 
 // that my professor provided to complete my workshops and assignments.
 
-#include "LibApp.h"
 #include <iostream>
+#include "LibApp.h"
 
 using namespace std;
 namespace sdds {
@@ -16,7 +16,7 @@ namespace sdds {
         Menu menu(message);
         menu << "Yes";
 
-        int returnValue = menu.run();
+        int returnValue = menu.run(cin);
         if (returnValue == 1) {
             result = true;
         }
@@ -96,11 +96,11 @@ namespace sdds {
         bool continueRun = true;
 
         while (continueRun) {
-            inputMenu = m_mainMenu.run();
+            inputMenu = m_mainMenu.run(cin);
             switch (inputMenu) {
                 case 0:
                     if (m_changed == true) {
-                        inputExit = m_exitMenu.run();
+                        inputExit = m_exitMenu.run(cin);
                         switch (inputExit) {
                             case 0:
                                 if (confirm("This will discard all the changes are you sure?")) {
