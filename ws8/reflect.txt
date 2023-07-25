@@ -1,0 +1,7 @@
+ws7 (I was unsure about when to submit the reflect file, so I am submitting it late along with the ws8 reflect):
+	I found workshop 7 to be fairly easy to understand regarding derived classes. As always, I found input and output streams fairly tricky to work with. Sending the input and output to a reference of the ostream or istream object is something I was still trying to fully understand, but getting more practice has helped give me a better idea of how iostream is actually a class and each stream is actually an instance of an object. The comparison between a MotorVehicle and a Truck helped to strengthen my understanding of derived classes.
+
+ws8:
+For this workshop, I had to really study what inherited classes were. I initially had set the methods within the base class Shape to be private. Then I realized that this prevented the other classes from becoming concrete classes as they could not actually define the pure virtual methods prototyped in the base class. Similarly, I had restudy how to invoke the constructor of the base class within the child class' constructor. 
+I ran into another issue where I had tried to ignore the delimiter too many times since I was reading over the delimiter comma one from the LblShape getSpecs method and once more from my Rectangle class' getSpecs method, which effectively always made the input skip over the width attribute.
+Once I got more comfortable and understood how the derived classes were related to the base class, it was much easier to understand the logic behind the program.
