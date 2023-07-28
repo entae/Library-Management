@@ -120,10 +120,13 @@ namespace sdds {
         m_membership = 0;
         m_date = Date();
 
+        bool valid = true;
+
         if (conIO(istr)) {
             cout << "Shelf No: ";
-            if(ut.strLen(m_shelfId) == 4) {
-                istr.get(m_shelfId, 4);
+            istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1);
+            if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
+                valid = false;
             }
             cout << "Title: ";
             istr >> m_title;
@@ -142,7 +145,17 @@ namespace sdds {
             istr >> m_date;
         }
         //Either way if the date is in an invalid state set the istr to a fail state manually
-        setRef(m_libRef);
+        if (!m_date) {
+            valid = false;
+        }
+
+        if (!valid) {
+            istr.setstate(ios::failbit);
+        }
+        else {
+            setRef(m_libRef);
+        }
+
         return istr;
     }
 
