@@ -124,7 +124,7 @@ namespace sdds {
         if (conIO(istr)) {
             cout << "Shelf No: ";
             istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1);
-            is.ignore(1000,'\n');
+            istr.ignore(1000,'\n');
             if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
