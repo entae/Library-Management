@@ -12,15 +12,14 @@
 
 using namespace std;
 namespace sdds{
-     std::ostream& operator<<(std::ostream& os, const Streamable& stream) {
+     std::ostream& operator<<(std::ostream& ostr, const Streamable& stream) {
         if (stream) {
-            stream.write(os);
+            stream.write(ostr);
         }
-        return os;
+        return ostr;
     }
 
-     std::istream& operator>>(std::istream& is, Streamable& stream) {
-        stream.read(is);
-        return is;
+     std::istream& operator>>(std::istream& istr, Streamable& stream) {
+        return stream.read(istr);
     }
 }

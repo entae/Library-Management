@@ -13,6 +13,14 @@
 
 using namespace std;
 namespace sdds {
+
+    void Publication::setEmpty() {
+        m_title = nullptr;
+        m_shelfId[0] = '\0';
+        m_membership = 0;
+        m_libRef = -1;
+        m_date = Date();
+    }
     //double check if Date object m_date can be reallocated
     Publication::Publication(const Publication& issue) : 
         m_membership(issue.m_membership), 
@@ -92,8 +100,8 @@ namespace sdds {
 
     ostream& Publication::write(ostream& ostr)const {
         if (conIO(ostr)) {
-            ostr << "| " << type() << m_shelfId << " | ";
-            ostr.width(30);
+            ostr << "| " << m_shelfId << " | ";
+            ostr.width(SDDS_TITLE_WIDTH);
             ostr.fill('.');
             ostr << left << m_title << " | ";
             if (m_membership > 9999 && m_membership < 100000) {
@@ -115,28 +123,23 @@ namespace sdds {
     }
 
     istream &Publication::read(istream& istr) {
-        m_title[0] = '\0';
-        m_shelfId[0] = '\0';
-        m_membership = 0;
-        m_date = Date();
-
-        bool valid = true;
+        setEmpty();
 
         if (conIO(istr)) {
             cout << "Shelf No: ";
             istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1);
             if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
-                valid = false;
+                istr.setstate(ios::failbit);
             }
             cout << "Title: ";
-            istr >> m_title;
+            istr.getline(m_title, SDDS_TITLE_WIDTH + 1);
             cout << "Date: ";
             istr >> m_date;
         }
         else {
             istr >> m_libRef;
             istr.ignore();
-            istr.get(m_shelfId, 4, '\t');
+            istr.get(m_shelfId, 5, '\t');
             istr.ignore();
             istr.getline(m_title, sizeof(m_title), '\t');
             istr.ignore();
@@ -145,17 +148,7 @@ namespace sdds {
             istr >> m_date;
         }
         //Either way if the date is in an invalid state set the istr to a fail state manually
-        if (!m_date) {
-            valid = false;
-        }
-
-        if (!valid) {
-            istr.setstate(ios::failbit);
-        }
-        else {
-            setRef(m_libRef);
-        }
-
+        
         return istr;
     }
 

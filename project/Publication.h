@@ -15,15 +15,18 @@
 namespace sdds {
     class Publication : public Streamable {
         char m_title[256]{};
-        char m_shelfId[4]{};
+        char m_shelfId[5]{};
         int m_membership{}; //0 = available; 10000 >= checked out by member
         int m_libRef{-1};
         Date m_date{};
+        //implemented setEmpty function
+        void setEmpty();
+
     public:
         //constructor //may need to define char strings
         Publication() = default;
         //destructor
-        virtual ~Publication() {};
+        virtual ~Publication() = default;
         //copy constructor
         Publication(const Publication& issue);
         //copy assignment
