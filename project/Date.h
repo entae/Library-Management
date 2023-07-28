@@ -60,7 +60,7 @@ namespace sdds {
       * @param is - input instance to gather year,mon,day
       * @returns - formatted istream instance
       */
-      std::istream& read(std::istream& is = cin); 
+      std::istream& read(std::istream& is = std::cin); 
 
       /**
       * If the Date object is in a "bad" state (is invalid) print the "dateStatus()". 
@@ -68,7 +68,7 @@ namespace sdds {
       * @param os - ostream set to print formatted YYYY/MM/DD
       * @returns - formatted ostream instance
       */
-      std::ostream& write(std::ostream& os = cout)const;  
+      std::ostream& write(std::ostream& os = std::cout)const;  
 
       //Use the return value of the daysSince0001_1_1() method to compare the two dates
       bool operator==(const Date& d)const;
@@ -94,5 +94,11 @@ namespace sdds {
    std::ostream& operator<<(std::ostream& os, const Date& RO);
    std::istream& operator>>(std::istream& is, Date& RO);
 
+//This will make the global variables added to Date.cpp, truly global for any code including "Date.h".
+   extern bool sdds_test;
+   extern int sdds_year;
+   extern int sdds_mon;
+   extern int sdds_day;
 }
+
 #endif // !SDDS_DATE_H__

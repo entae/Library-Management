@@ -23,8 +23,8 @@ namespace sdds
 	{
 		if (name) {
 			delete[] m_name;
-			m_name = new char[strLen(name) + 1];
-			strCpy(m_name, name);
+			m_name = new char[ut.strLen(name) + 1];
+			ut.strCpy(m_name, name);
 		} else {
 			delete[] m_name;
 			m_name = nullptr; 
@@ -60,8 +60,8 @@ namespace sdds
 	Menu::Menu(const char* name) {
 		if (name) {
 			delete[] menuName.m_name;
-			menuName.m_name = new char[strLen(name) + 1];
-			strCpy(menuName.m_name,name);
+			menuName.m_name = new char[ut.strLen(name) + 1];
+			ut.strCpy(menuName.m_name,name);
 			numMenu = 0;
 		} else {
 			delete[] menuName.m_name;

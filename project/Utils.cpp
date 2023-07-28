@@ -14,12 +14,12 @@
 // that my professor provided to complete my workshops and assignments.
 /////////////////////////////////////////////////////////////////
 ***********************************************************************/
-
+#include <iostream>
 #include "Utils.h"
 namespace sdds {
-
+    Utils ut;
     // Copies the source character string into the destination
-    void strCpy(char* des, const char* src) {
+    void Utils::strCpy(char* des, const char* src) {
         int i = 0;
         //
         while (src[i] != '\0') {
@@ -30,11 +30,24 @@ namespace sdds {
     }
 
     // returns the length of the C-string in characters
-    int strLen(const char* s) {
+    int Utils::strLen(const char* s) {
         int len = 0;
         while (s[len] != '\0')
             len++;
         return len;
+    }
+
+    void Utils::reAloCpy( char*& des, const char* src ) {
+        delete[] des;
+        aloCpy( des, src );
+    }
+
+    void Utils::aloCpy( char*& des, const char* src ) {
+        des = nullptr;
+        if ( src ) {
+            des = new char[ut.strLen( src ) + 1];
+            ut.strCpy( des, src );
+        }
     }
 
 }
