@@ -93,7 +93,11 @@ namespace sdds {
 
     ostream& Publication::write(ostream& ostr)const {
         if (conIO(ostr)) {
-            ostr << "| " << m_shelfId << " | ";
+            ostr << "Shelf No: ";
+            ostr.width(SDDS_SHELF_ID_LEN);
+            ostr.fill(' ');
+
+            ostr << "| " << left << m_shelfId << " | ";
             ostr.width(SDDS_TITLE_WIDTH);
             ostr.fill('.');
             ostr << left << m_title << " | ";
@@ -128,20 +132,21 @@ namespace sdds {
             if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
-            cout << "Title: ";
-            istr.getline(m_title, SDDS_TITLE_WIDTH + 1);
-            cout << "Date: ";
-            istr >> m_date;
+            else {
+                cout << "Title: ";
+                istr.getline(m_title, SDDS_TITLE_WIDTH + 1);
+                cout << "Date: ";
+                istr >> m_date;
+            }
         }
         else {
             istr >> m_libRef;
-            istr.ignore();
-            istr.get(m_shelfId, 5, '\t');
-            istr.ignore();
-            istr.getline(m_title, sizeof(m_title), '\t');
-            istr.ignore();
+            istr.ignore(1000,'\t');
+            istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1, '\t');
+            istr.ignore(1000,'\t');
+            istr.getline(m_title, SDDS_TITLE_WIDTH + 1, '\t');
             istr >> m_membership;
-            istr.ignore();
+            istr.ignore(1000,'\t');
             istr >> m_date;
         }
         //Either way if the date is in an invalid state set the istr to a fail state manually
