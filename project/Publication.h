@@ -19,8 +19,6 @@ namespace sdds {
         int m_membership{}; //0 = available; 10000 >= checked out by member
         int m_libRef{-1};
         Date m_date{};
-        //implemented setEmpty function
-        void setEmpty();
 
     public:
         //constructor //may need to define char strings

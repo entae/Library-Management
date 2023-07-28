@@ -14,13 +14,6 @@
 using namespace std;
 namespace sdds {
 
-    void Publication::setEmpty() {
-        m_title = nullptr;
-        m_shelfId[0] = '\0';
-        m_membership = 0;
-        m_libRef = -1;
-        m_date = Date();
-    }
     //double check if Date object m_date can be reallocated
     Publication::Publication(const Publication& issue) : 
         m_membership(issue.m_membership), 
@@ -123,7 +116,10 @@ namespace sdds {
     }
 
     istream &Publication::read(istream& istr) {
-        setEmpty();
+        m_title[0] = '\0';
+        m_shelfId[0] = '\0';
+        m_membership = 0;
+        m_date = Date();
 
         if (conIO(istr)) {
             cout << "Shelf No: ";
@@ -148,7 +144,7 @@ namespace sdds {
             istr >> m_date;
         }
         //Either way if the date is in an invalid state set the istr to a fail state manually
-        
+
         return istr;
     }
 
