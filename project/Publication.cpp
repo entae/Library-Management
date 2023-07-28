@@ -124,6 +124,7 @@ namespace sdds {
         if (conIO(istr)) {
             cout << "Shelf No: ";
             istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1);
+            is.ignore(1000,'\n');
             if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
@@ -144,7 +145,9 @@ namespace sdds {
             istr >> m_date;
         }
         //Either way if the date is in an invalid state set the istr to a fail state manually
-
+        if(!m_date) {
+            istr.setstate(ios::failbit);
+        }
         return istr;
     }
 
