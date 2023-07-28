@@ -14,22 +14,31 @@
 using namespace std;
 namespace sdds {
 
+    Publication::Publication() :
+        m_title(nullptr),
+        m_membership(0),
+        m_libRef(-1),
+        m_date(Date()) {
+        m_shelfId[0] = '\0';
+    }
+
+    Publication::~Publication() {
+        delete[] m_title;
+    }
+
     //double check if Date object m_date can be reallocated
     Publication::Publication(const Publication& issue) : 
-        m_membership(issue.m_membership), 
-        m_libRef(issue.m_libRef), 
-        m_date(issue.m_date) {
-            if (issue) {
-                ut.strCpy(m_title, issue.m_title);
-                ut.strCpy(m_shelfId, issue.m_shelfId);
-            }
+        Publication() {
+            *this = issue;
     }
     //double check that object does not need to be set to a safe state if reallocation is invalid
     Publication& Publication::operator=(const Publication& issue) {
         if (this != &issue) {
+            delete[] m_title;
             m_membership = issue.m_membership;
             m_libRef = issue.m_libRef;
             m_date = issue.m_date;
+            m_title = new char[ut.strLen(issue.m_title) + 1];
             ut.strCpy(m_title, issue.m_title);
             ut.strCpy(m_shelfId, issue.m_shelfId);
         }
@@ -38,7 +47,7 @@ namespace sdds {
 
 //Modifiers:
     void Publication::set(int member_id) {
-        if (member_id >= 10000) {
+        if (member_id > 9999 && member_id < 100000) {
             m_membership = member_id;
         } else {
             m_membership = 0;
@@ -64,11 +73,7 @@ namespace sdds {
     }
 
     bool Publication::onLoan() const{
-        bool checkedout = false;
-        if (m_membership > 9999 && m_membership < 100000) {
-            checkedout = true;
-        }
-        return checkedout;
+        return (m_membership > 9999 && m_membership < 100000);
     }
 
     Date Publication::checkoutDate()const {
@@ -93,14 +98,12 @@ namespace sdds {
 
     ostream& Publication::write(ostream& ostr)const {
         if (conIO(ostr)) {
-            ostr << "Shelf No: ";
-            ostr.width(SDDS_SHELF_ID_LEN);
-            ostr.fill(' ');
-
             ostr << "| " << left << m_shelfId << " | ";
             ostr.width(SDDS_TITLE_WIDTH);
             ostr.fill('.');
             ostr << left << m_title << " | ";
+            ostr.width(6);
+            ostr.fill(' ');
             if (m_membership > 9999 && m_membership < 100000) {
                 ostr << m_membership;
             } else {
@@ -120,33 +123,43 @@ namespace sdds {
     }
 
     istream &Publication::read(istream& istr) {
-        m_title[0] = '\0';
+        delete[] m_title;
+        m_title = nullptr;
         m_shelfId[0] = '\0';
         m_membership = 0;
+        m_libRef = -1;
         m_date = Date();
 
         if (conIO(istr)) {
             cout << "Shelf No: ";
             istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1);
-            istr.ignore(1000,'\n');
             if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
-            else {
-                cout << "Title: ";
-                istr.getline(m_title, SDDS_TITLE_WIDTH + 1);
-                cout << "Date: ";
-                istr >> m_date;
-            }
+
+            cout << "Title: ";
+            char buffer[256];
+            istr.ignore(256,'\n');
+            istr.get(buffer, sizeof(buffer));
+            m_title = new char[ut.strLen(buffer) + 1];
+            ut.strCpy(m_title, buffer);
+
+            cout << "Date: ";
+            istr >> m_date;
         }
         else {
             istr >> m_libRef;
-            istr.ignore(1000,'\t');
+            istr.ignore();
             istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1, '\t');
-            istr.ignore(1000,'\t');
-            istr.getline(m_title, SDDS_TITLE_WIDTH + 1, '\t');
+            istr.ignore();
+            char buffer[256];
+            istr.get(buffer, sizeof(buffer), '\t');
+            m_title = new char[ut.strLen(buffer) + 1];
+            ut.strCpy(m_title, buffer);
+
+            istr.ignore();
             istr >> m_membership;
-            istr.ignore(1000,'\t');
+            istr.ignore();
             istr >> m_date;
         }
         //Either way if the date is in an invalid state set the istr to a fail state manually

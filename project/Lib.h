@@ -32,7 +32,7 @@ namespace sdds {
 
         virtual operator bool()const = 0;
 
-        virtual ~Streamable() {};
+        virtual ~Streamable() = default;
     };
 
     std::ostream& operator<<(std::ostream& os, const Streamable& stream);
