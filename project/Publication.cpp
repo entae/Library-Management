@@ -4,22 +4,16 @@
 // Finish Date: July , 2023 
 // I have done all the coding by myself and only copied the code 
 // that my professor provided to complete my workshops and assignments.
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
 #include "Publication.h"
-#include "Date.h"
-#include "Utils.h"
 
 using namespace std;
 namespace sdds {
 
-    Publication::Publication() :
-        m_title(nullptr),
-        m_membership(0),
-        m_libRef(-1),
-        m_date(Date()) {
-        m_shelfId[0] = '\0';
+    Publication::Publication() {
+       makeDefault();
     }
 
     Publication::~Publication() {
@@ -27,25 +21,40 @@ namespace sdds {
     }
 
     //double check if Date object m_date can be reallocated
-    Publication::Publication(const Publication& issue) : 
-        Publication() {
-            *this = issue;
+    Publication::Publication(const Publication& issue) {
+        *this = issue;
     }
     //double check that object does not need to be set to a safe state if reallocation is invalid
     Publication& Publication::operator=(const Publication& issue) {
         if (this != &issue) {
-            delete[] m_title;
-            m_membership = issue.m_membership;
-            m_libRef = issue.m_libRef;
-            m_date = issue.m_date;
-            m_title = new char[ut.strLen(issue.m_title) + 1];
-            ut.strCpy(m_title, issue.m_title);
-            ut.strCpy(m_shelfId, issue.m_shelfId);
+            if (issue) {
+                if (m_title) {
+                    delete[] m_title;
+                    m_title = nullptr;
+                }
+                m_title = new char[strlen(issue.m_title) + 1];
+                strcpy(m_title, issue.m_title);
+                set(issue.m_membership);
+                setRef(issue.m_libRef);
+                m_date = issue.m_date;
+                strcpy(m_shelfId, issue.m_shelfId);
+            }
         }
         return *this;
     }
 
 //Modifiers:
+    void Publication::makeDefault() {
+        if (m_title) {
+            delete[] m_title;
+        }
+        m_title = nullptr;
+        m_shelfId[0] = '\0';
+        m_membership = 0;
+        m_libRef = -1;
+        resetDate();
+    }
+
     void Publication::set(int member_id) {
         if (member_id > 9999 && member_id < 100000) {
             m_membership = member_id;
@@ -63,13 +72,8 @@ namespace sdds {
     }
 
 //Queries:
-    //may not need to validate instance
     char Publication::type()const {
-        char letter{};
-        if (*this) {
-            letter = 'P';
-        }
-        return letter;
+        return 'P';
     }
 
     bool Publication::onLoan() const{
@@ -98,79 +102,88 @@ namespace sdds {
 
     ostream& Publication::write(ostream& ostr)const {
         if (conIO(ostr)) {
-            ostr << "| " << left << m_shelfId << " | ";
+            ostr << "| ";
+            ostr << m_shelfId << " | ";
+
             ostr.width(SDDS_TITLE_WIDTH);
             ostr.fill('.');
             ostr << left << m_title << " | ";
-            ostr.width(6);
-            ostr.fill(' ');
-            if (m_membership > 9999 && m_membership < 100000) {
+
+            if (onLoan()) {
                 ostr << m_membership;
             } else {
                 ostr << " N/A ";
             }
-            ostr << " | " << m_date << " |";
+            ostr << " | " << checkoutDate() << " |";
         }
         else {
-            ostr << type() << '\t' 
+            ostr << type() << '\t'
                 << m_libRef << '\t'
                 << m_shelfId << '\t'
-                << m_title << '\t'
-                << m_membership << '\t'
-                << m_date;
+                << m_title << '\t';
+                if (onLoan()) {
+                    ostr << m_membership;
+                }
+                else {
+                    ostr << " N/A ";
+                }
+                ostr << '\t' << checkoutDate();
         }
         return ostr;
     }
 
     istream &Publication::read(istream& istr) {
-        delete[] m_title;
-        m_title = nullptr;
-        m_shelfId[0] = '\0';
-        m_membership = 0;
-        m_libRef = -1;
-        m_date = Date();
+        //local variables;
+        char tempTitle[256]{};
+        char tempShelfId[SDDS_SHELF_ID_LEN + 1]{};
+        int tempMembership = 0;
+        int tempLibRef = -1;
+        Date tempDate;
 
+        //clear all attributes to default
+        makeDefault();
+
+        // Read all values into local variables
         if (conIO(istr)) {
             cout << "Shelf No: ";
-            istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1);
-            if (ut.strLen(m_shelfId) != SDDS_SHELF_ID_LEN) {
+            istr.getline(tempShelfId, SDDS_SHELF_ID_LEN + 1);
+            if (strlen(tempShelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
-
-            cout << "Title: ";
-            char buffer[256];
-            istr.ignore(256,'\n');
-            istr.get(buffer, sizeof(buffer));
-            m_title = new char[ut.strLen(buffer) + 1];
-            ut.strCpy(m_title, buffer);
-
-            cout << "Date: ";
-            istr >> m_date;
+            else {
+                cout << "Title: ";
+                istr.getline(tempTitle, 256);
+                cout << "Date: ";
+                istr >> tempDate;
+            }
+        } 
+        else {
+            istr >> tempLibRef;
+            istr.ignore(1000, '\t');
+            istr.getline(tempShelfId, SDDS_SHELF_ID_LEN + 1, '\t');
+            istr.getline(tempTitle, 256, '\t');
+            istr >> tempMembership;
+            istr.ignore(1000, '\t');
+            istr >> tempDate;
+        }
+        //if istr is condole ID, read interactively
+        if (!tempDate) {
+            // Read values from local variables and set attributes
+            istr.setstate(ios::failbit);
         }
         else {
-            istr >> m_libRef;
-            istr.ignore();
-            istr.get(m_shelfId, SDDS_SHELF_ID_LEN + 1, '\t');
-            istr.ignore();
-            char buffer[256];
-            istr.get(buffer, sizeof(buffer), '\t');
-            m_title = new char[ut.strLen(buffer) + 1];
-            ut.strCpy(m_title, buffer);
-
-            istr.ignore();
-            istr >> m_membership;
-            istr.ignore();
-            istr >> m_date;
-        }
-        //Either way if the date is in an invalid state set the istr to a fail state manually
-        if(!m_date) {
-            istr.setstate(ios::failbit);
+            m_title = new char[strlen(tempTitle) + 1];
+            strcpy(m_title, tempTitle);
+            strcpy(m_shelfId, tempShelfId);
+            set(tempMembership);
+            setRef(tempLibRef);
+            m_date = tempDate;
         }
         return istr;
     }
 
     Publication::operator bool()const {
-        return m_title[0] != '\0' && m_shelfId[0] != '\0';
+        return (m_title && m_title[0] != '\0' && m_shelfId[0] != '\0' && m_date);
     }
 
 }

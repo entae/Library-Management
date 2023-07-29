@@ -14,8 +14,8 @@
 
 namespace sdds {
     class Publication : public Streamable {
-        char* m_title{}; //assume dynamic array cannot be more than 255 char long
-        char m_shelfId[5]{};
+        char* m_title{nullptr}; //assume dynamic array cannot be more than 255 char long
+        char m_shelfId[SDDS_SHELF_ID_LEN + 1]{};
         int m_membership{}; //0 = available; 10000 >= checked out by member
         int m_libRef{-1};
         Date m_date{};
@@ -23,14 +23,16 @@ namespace sdds {
     public:
         //constructor //may need to define char strings
         Publication();
-        //destructor
-        virtual ~Publication();
         //copy constructor
         Publication(const Publication& issue);
         //copy assignment
         Publication& operator=(const Publication& issue);
+        //destructor
+        virtual ~Publication();
 
     //Modifiers:    
+        void makeDefault();
+
         // Sets the membership attribute to either zero or a five-digit integer.
         virtual void set(int member_id);
 

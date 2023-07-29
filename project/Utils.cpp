@@ -32,8 +32,10 @@ namespace sdds {
     // returns the length of the C-string in characters
     int Utils::strLen(const char* s) {
         int len = 0;
-        while (s[len] != '\0')
-            len++;
+        if (s != nullptr) { //condition added to avoid nullpointers
+            while (s[len] != '\0')
+                len++;
+        }
         return len;
     }
 

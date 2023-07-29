@@ -41,10 +41,10 @@ namespace sdds {
 }
 
 //This will make the global variables added to Date.cpp, truly global for any code including "Date.h".
-//    extern const int SDDS_MAX_LOAN_DAYS;
-//    extern const int SDDS_TITLE_WIDTH;
-//    extern const int SDDS_AUTHOR_WIDTH;
-//    extern const int SDDS_SHELF_ID_LEN;
-//    extern const int SDDS_LIBRARY_CAPACITY;
+    extern const int SDDS_MAX_LOAN_DAYS;
+    extern const int SDDS_TITLE_WIDTH;
+    extern const int SDDS_AUTHOR_WIDTH;
+    extern const int SDDS_SHELF_ID_LEN;
+    extern const int SDDS_LIBRARY_CAPACITY;
 
 #endif // !SDDS_LIB_H__
