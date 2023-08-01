@@ -41,7 +41,7 @@ namespace sdds {
         void setRef(int value);
 
         // Sets the date to the current date of the system.
-        void resetDate();
+        virtual void resetDate();
 
     //Queries:
         //Returns the character 'P' to identify this object as a "Publication object"
@@ -63,7 +63,7 @@ namespace sdds {
         int getRef()const;
         
     //Streamable pure virtual functions
-        bool conIO(std::ios& io)const;
+        virtual bool conIO(std::ios& io)const;
 
         virtual std::ostream& write(std::ostream& ostr)const;
 

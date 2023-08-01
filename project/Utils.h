@@ -23,6 +23,8 @@ namespace sdds {
     public:
         void strCpy(char* des, const char* src);
 
+        char* strncpy(char* des, const char* src, int len)const;
+
         int strLen(const char* s);
 
         const char* strstr(const char* str, const char* find)const;

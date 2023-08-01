@@ -1,6 +1,0 @@
-I was able to complete workshop 6 without any noticeable, but had a hard time completing MS1 and ended up submitting it past the week after the deadline. 
-
-I found working with methods that return an ostream& to be the most difficult. As I attempted to compile and run the testers, I kept repeatedly getting errors indicating that the writing function was not working properly. For the methods displaying the menu title and the entire menu, I realized that I had made them void functions with ostream incidents as an input, where they obviously should have also been returning the ostream object as well. 
-
-Working with a class that uses another class made this milestone interesting so far, but also made me realize that I have to be much more organized with how I code.
-I will try my best to ensure milestone 2 is submitted before any deductions.

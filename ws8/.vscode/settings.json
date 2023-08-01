@@ -35,7 +35,6 @@
   ],
   "C_Cpp_Runner.useAddressSanitizer": false,
   "files.associations": {
-    "ios": "cpp",
     "iosfwd": "cpp"
   }
 }

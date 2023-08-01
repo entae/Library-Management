@@ -29,6 +29,16 @@ namespace sdds {
         des[i] = '\0';
     }
 
+    char* Utils::strncpy(char* des, const char* src, int len)const {
+        int i = 0;
+        while (i < len - 1 && src[i]) {
+            des[i] = src[i];
+            i++;
+        }
+        des[i] = src[i];
+        return des;
+    }
+
     // returns the length of the C-string in characters
     int Utils::strLen(const char* s) {
         int len = 0;

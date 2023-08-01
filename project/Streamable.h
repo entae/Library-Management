@@ -6,7 +6,7 @@
 // that my professor provided to complete my workshops and assignments.
 
 #ifndef SDDS_STREAMABLE_H_
-#define SDDS_STREAMABLE_H
+#define SDDS_STREAMABLE_H_
 
 #include <iostream> 
 namespace sdds {

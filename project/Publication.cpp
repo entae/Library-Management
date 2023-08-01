@@ -105,7 +105,6 @@ namespace sdds {
         if (conIO(ostr)) {
             ostr << "| ";
             ostr << m_shelfId << " | ";
-
             ostr.width(SDDS_TITLE_WIDTH);
             ostr.fill('.');
             ostr << left << m_title << " | ";
@@ -151,12 +150,10 @@ namespace sdds {
             if (strlen(tempShelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
-            else {
-                cout << "Title: ";
-                istr.getline(tempTitle, 256);
-                cout << "Date: ";
-                istr >> tempDate;
-            }
+            cout << "Title: ";
+            istr.getline(tempTitle, 256);
+            cout << "Date: ";
+            istr >> tempDate;
         } 
         else {
             istr >> tempLibRef;
@@ -167,11 +164,11 @@ namespace sdds {
             istr.ignore(1000, '\t');
             istr >> tempDate;
         }
-        //if istr is condole ID, read interactively
+        //if tempDate is invalid set istr to failstate
         if (!tempDate) {
-            // Read values from local variables and set attributes
             istr.setstate(ios::failbit);
         }
+        //if istr is not in fail state, read interactively
         else {
             m_title = new char[strlen(tempTitle) + 1];
             strcpy(m_title, tempTitle);
