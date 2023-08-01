@@ -50,25 +50,19 @@ namespace sdds {
     ostream& Book::write(ostream& ostr)const{
         Publication::write(ostr);
         if (conIO(ostr)) {
-            ostr << ' ' << ostr.width(SDDS_AUTHOR_WIDTH) << left;
-            if (ut.strLen(m_author) > SDDS_AUTHOR_WIDTH) {
-                for (int i = 0; i < SDDS_AUTHOR_WIDTH; ++ i) {
-                    ostr << m_author[i];
-                }
-            }
-            else {
-                ostr << m_author;
+            ostr << ' ';
+            ostr.width(SDDS_AUTHOR_WIDTH);
+            if (m_author) {
+                char temp[SDDS_AUTHOR_WIDTH + 1];
+                ut.strncpy(temp, m_author, SDDS_AUTHOR_WIDTH);
+                temp[SDDS_AUTHOR_WIDTH] = '\0';
+                ostr << temp;
             }
             ostr << " |";
         }
         else {
             ostr << '\t';
-            if (ut.strLen(m_author) > SDDS_AUTHOR_WIDTH) {
-                for (int i = 0; i < SDDS_AUTHOR_WIDTH; ++ i) {
-                    ostr << m_author[i];
-                }
-            }
-            else {
+            if (m_author) {
                 ostr << m_author;
             }
         }
