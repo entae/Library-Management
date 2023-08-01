@@ -83,7 +83,6 @@ namespace sdds {
             istr.ignore(1000,'\n');
             cout << "Author: ";
             istr.getline(tempName, 256);
-            istr.ignore(1000,'\n');
         }
         else {
             istr.ignore(1000,'\t');
