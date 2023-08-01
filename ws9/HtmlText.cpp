@@ -22,8 +22,8 @@ namespace sdds {
     HtmlText::HtmlText(const HtmlText& other) : 
         Text(other) {
         if (other.m_title) {
-            m_title = new char[strlen(other.m_title) + 1];
-            strcpy(m_title, other.m_title);
+            m_title = new char[strLen(other.m_title) + 1];
+            strCpy(m_title, other.m_title);
         }
         else {
             m_title = nullptr;
