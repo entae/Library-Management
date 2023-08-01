@@ -63,7 +63,10 @@ namespace sdds {
         else {
             ostr << '\t';
             if (m_author) {
-                ostr << m_author;
+                char temp[SDDS_AUTHOR_WIDTH + 1];
+                ut.strncpy(temp, m_author, SDDS_AUTHOR_WIDTH);
+                temp[SDDS_AUTHOR_WIDTH] = '\0';
+                ostr << temp;
             }
         }
         return ostr;
@@ -80,6 +83,7 @@ namespace sdds {
             istr.ignore(1000,'\n');
             cout << "Author: ";
             istr.getline(tempName, 256);
+            istr.ignore(1000,'\n');
         }
         else {
             istr.ignore(1000,'\t');

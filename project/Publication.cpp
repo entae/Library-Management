@@ -8,6 +8,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
+#include "Utils.h"
 #include "Publication.h"
 
 using namespace std;
@@ -33,12 +34,12 @@ namespace sdds {
                     delete[] m_title;
                     m_title = nullptr;
                 }
-                m_title = new char[strlen(issue.m_title) + 1];
-                strcpy(m_title, issue.m_title);
+                m_title = new char[ut.strLen(issue.m_title) + 1];
+                ut.strCpy(m_title, issue.m_title);
                 set(issue.m_membership);
                 setRef(issue.m_libRef);
                 m_date = issue.m_date;
-                strcpy(m_shelfId, issue.m_shelfId);
+                ut.strCpy(m_shelfId, issue.m_shelfId);
             }
         }
         return *this;
@@ -105,9 +106,17 @@ namespace sdds {
         if (conIO(ostr)) {
             ostr << "| ";
             ostr << m_shelfId << " | ";
+
             ostr.width(SDDS_TITLE_WIDTH);
             ostr.fill('.');
-            ostr << left << m_title << " | ";
+            ostr << left;
+            if (m_title) {
+                char temp[SDDS_TITLE_WIDTH + 1];
+                ut.strncpy(temp, m_title, SDDS_TITLE_WIDTH);
+                temp[SDDS_TITLE_WIDTH] = '\0';
+                ostr << temp;
+            } 
+             ostr << " | ";
 
             if (onLoan()) {
                 ostr << m_membership;
@@ -147,7 +156,7 @@ namespace sdds {
         if (conIO(istr)) {
             cout << "Shelf No: ";
             istr.getline(tempShelfId, SDDS_SHELF_ID_LEN + 1);
-            if (strlen(tempShelfId) != SDDS_SHELF_ID_LEN) {
+            if (ut.strLen(tempShelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
             cout << "Title: ";
@@ -170,9 +179,9 @@ namespace sdds {
         }
         //if istr is not in fail state, read interactively
         else {
-            m_title = new char[strlen(tempTitle) + 1];
-            strcpy(m_title, tempTitle);
-            strcpy(m_shelfId, tempShelfId);
+            m_title = new char[ut.strLen(tempTitle) + 1];
+            ut.strCpy(m_title, tempTitle);
+            ut.strCpy(m_shelfId, tempShelfId);
             set(tempMembership);
             setRef(tempLibRef);
             m_date = tempDate;
