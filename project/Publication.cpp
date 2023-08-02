@@ -156,6 +156,7 @@ namespace sdds {
         if (conIO(istr)) {
             cout << "Shelf No: ";
             istr.getline(tempShelfId, SDDS_SHELF_ID_LEN + 1);
+
             if (ut.strLen(tempShelfId) != SDDS_SHELF_ID_LEN) {
                 istr.setstate(ios::failbit);
             }
@@ -172,7 +173,6 @@ namespace sdds {
             istr >> tempMembership;
             istr.ignore(1000, '\t');
             istr >> tempDate;
-            istr.ignore(1000,'\t');
         }
         //if tempDate is invalid set istr to failstate
         if (!tempDate) {

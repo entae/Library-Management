@@ -5,8 +5,8 @@
 // I have done all the coding by myself and only copied the code 
 // that my professor provided to complete my workshops and assignments.
 
-
 #include <iostream>
+#include <cstring>
 #include "Book.h"
 #include "Utils.h"
 
@@ -29,12 +29,12 @@ namespace sdds {
             }
 
             if(book.m_author) {
-                m_author = new char[ut.strLen(book.m_author) + 1];
-                ut.strCpy(m_author, book.m_author);
+                m_author = new char[strlen(book.m_author) + 1];
+                strcpy(m_author, book.m_author);
             }
-            else {
-                m_author = nullptr;
-            }
+            // else {
+            //     m_author = nullptr;
+            // }
         }
         return *this;
     }
@@ -49,25 +49,19 @@ namespace sdds {
 
     ostream& Book::write(ostream& ostr)const{
         Publication::write(ostr);
+
         if (conIO(ostr)) {
+            char temp[SDDS_AUTHOR_WIDTH + 1]{};
+            strncpy(temp, m_author, SDDS_AUTHOR_WIDTH);
             ostr << ' ';
             ostr.width(SDDS_AUTHOR_WIDTH);
-            if (m_author) {
-                char temp[SDDS_AUTHOR_WIDTH + 1];
-                ut.strncpy(temp, m_author, SDDS_AUTHOR_WIDTH);
-                temp[SDDS_AUTHOR_WIDTH] = '\0';
-                ostr << temp;
-            }
+            ostr << left;
+            ostr.fill(' ');
+            ostr << temp;
             ostr << " |";
         }
         else {
-            ostr << '\t';
-            if (m_author) {
-                char temp[SDDS_AUTHOR_WIDTH + 1];
-                ut.strncpy(temp, m_author, SDDS_AUTHOR_WIDTH);
-                temp[SDDS_AUTHOR_WIDTH] = '\0';
-                ostr << temp;
-            }
+            ostr << '\t' << m_author;
         }
         return ostr;
     }
@@ -76,29 +70,31 @@ namespace sdds {
         Publication::read(istr);
 
         char tempName[256]{};
-        delete[] m_author;
-        m_author = nullptr;
+        if (m_author) {
+            delete[] m_author;
+            m_author = nullptr;
+        }
 
         if (conIO(istr)) {
-            istr.ignore(1000,'\n');
+            istr.ignore(); //1000,'\n'
             cout << "Author: ";
-            istr.get(tempName, 256, '\n');
-            istr.ignore(1000,'\n');
         }
         else {
             istr.ignore(1000,'\t');
-            istr.get(tempName, 256, '\t');
         }
+        istr.get(tempName, 256);
+        
         if (istr) {
-            m_author = new char[ut.strLen(tempName) + 1];
-            ut.strCpy(m_author, tempName);
+            m_author = new char[strlen(tempName) + 1];
+            strcpy(m_author, tempName);
+            //m_author[strlen(tempName)] = '\0';
         }
         return istr;
     }
 
     void Book::set(int member_id){
         Publication::set(member_id);
-        resetDate();
+        Publication::resetDate();
     }
 
     Book::operator bool()const{
