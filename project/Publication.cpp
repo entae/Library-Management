@@ -172,6 +172,7 @@ namespace sdds {
             istr >> tempMembership;
             istr.ignore(1000, '\t');
             istr >> tempDate;
+            istr.ignore(1000,'\t');
         }
         //if tempDate is invalid set istr to failstate
         if (!tempDate) {

@@ -82,11 +82,12 @@ namespace sdds {
         if (conIO(istr)) {
             istr.ignore(1000,'\n');
             cout << "Author: ";
-            istr.getline(tempName, 256);
+            istr.get(tempName, 256, '\n');
+            istr.ignore(1000,'\n');
         }
         else {
             istr.ignore(1000,'\t');
-            istr.getline(tempName, 256, '\t');
+            istr.get(tempName, 256, '\t');
         }
         if (istr) {
             m_author = new char[ut.strLen(tempName) + 1];
