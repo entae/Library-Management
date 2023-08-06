@@ -144,6 +144,7 @@ namespace sdds {
                     //cout.fill('0');
                     cout << penaltyDollars << '.';
                     cout.width(2);
+                    cout.fill('0');
                     cout << penaltyCentsRemainder;
                     cout.fill(' ');
                     cout << " penalty for being " << (daysLoaned - SDDS_MAX_LOAN_DAYS) << " days late!" << endl;
