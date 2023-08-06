@@ -126,7 +126,7 @@ namespace sdds {
 
     void LibApp::returnPub() {
         bool abort = false;
-        std::cout << "Return publication to the library" << std::endl;
+        cout << "Return publication to the library" << endl;
         int libRef = search(2);
         if (!(libRef > 0)) abort = true;
 
@@ -136,18 +136,18 @@ namespace sdds {
             if (confirmed) {
                 int daysLoaned = Date() - getPub(libRef)->checkoutDate();
                 if (daysLoaned > SDDS_MAX_LOAN_DAYS) {
-                    double penalty = (daysLoaned - SDDS_MAX_LOAN_DAYS) * 0.5;
-                    std::cout << std::fixed << std::setprecision(2);
-                    std::cout << "Please pay $" << penalty << " penalty for being " << (daysLoaned - SDDS_MAX_LOAN_DAYS) << " days late!" << std::endl;
+                    int penaltyCents = (daysLoaned - SDDS_MAX_LOAN_DAYS) * 50;
+                    cout << "Please pay $" << ( penaltyCents / 100 ) << '.' << setw(2) << setfill('0') << (penaltyCents % 100);
+                    cout << " penalty for being " << (daysLoaned - SDDS_MAX_LOAN_DAYS) << " days late!" << endl;
                 }
 
                 getPub(libRef)->set(0);
                 m_changed = true;
             }
 
-            std::cout << "Publication returned" << std::endl;
+            cout << "Publication returned" << endl;
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 
 //methods with confirmation:
@@ -160,7 +160,7 @@ namespace sdds {
         }
 
         if (!abort) {
-            std::cout << "Adding new publication to library" << endl;
+            cout << "Adding new publication to library" << endl;
             int pubType = m_publicationTypeMenu.run();
             cin.ignore(1000, '\n');
             Publication* p = nullptr;
@@ -186,7 +186,7 @@ namespace sdds {
             
             if (!abort && confirm("Add this publication to the library?")) {
                 if (!*p) {
-                    std::cout << "Failed to add publication!" << endl;
+                    cout << "Failed to add publication!" << endl;
                     delete p;
                 }
                 else {
@@ -196,18 +196,18 @@ namespace sdds {
                     m_NOLP++;
                     m_changed = true;
 
-                    std::cout << "Publication added" << endl;
+                    cout << "Publication added" << endl;
                 }
             }
         }
-        std::cout << endl;
+        cout << endl;
     }
 
     void LibApp::removePublication() {
         cout << "Removing publication from library" << endl;
         int libRef = search(1);
-        bool confirmed = confirm("Remove this publication from the library?");
-        if (confirmed) {
+        if (libRef && confirm("Remove this publication from the library?")) {
+            m_PPA[libRef-1]->setRef(0);
             m_changed = true;
             cout << "Publication removed" << endl;
         }
@@ -215,7 +215,7 @@ namespace sdds {
     }
 
     void LibApp::checkOutPub() {
-        std::cout << "Checkout publication from the library" << std::endl;
+        cout << "Checkout publication from the library" << endl;
         int libRef = search(3);
 
         if (libRef > 0) {
@@ -225,24 +225,24 @@ namespace sdds {
                 int inputMembership;
                 bool validInput = false;
                 while (!validInput) {
-                    std::cout << "Enter Membership number: ";
+                    cout << "Enter Membership number: ";
 
-                    if (!(std::cin >> inputMembership) || inputMembership < 10000 || inputMembership > 99999) {
-                        std::cin.clear();
-                        std::cin.ignore(1000, '\n');
-                        std::cout << "Invalid membership number, try again: ";
+                    if (!(cin >> inputMembership) || inputMembership < 10000 || inputMembership > 99999) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Invalid membership number, try again: ";
                     } else {
-                        std::cin.ignore(1000, '\n');
+                        cin.ignore(1000, '\n');
                         validInput = true;
                     }
                 }
 
                 getPub(libRef)->set(inputMembership);
                 m_changed = true;
-                std::cout << "Publication checked out" << std::endl;
+                cout << "Publication checked out" << endl;
             }
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 
 //constructor
