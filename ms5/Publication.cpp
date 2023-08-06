@@ -118,11 +118,11 @@ namespace sdds {
             } 
              ostr << " | ";
 
-            if (m_membership) {
+            //if (onLoan()) {
                 ostr << m_membership;
-            } else {
-                ostr << " N/A ";
-            }
+            //} else {
+            //    ostr << " N/A ";
+            //}
             ostr << " | " << checkoutDate() << " |";
         }
         else {
@@ -130,12 +130,12 @@ namespace sdds {
                 << m_libRef << '\t'
                 << m_shelfId << '\t'
                 << m_title << '\t';
-                if (m_membership) {
+                //if (onLoan()) {
                     ostr << m_membership;
-                }
-                else {
-                    ostr << " N/A ";
-                }
+                //}
+                //else {
+                //    ostr << " N/A ";
+                //}
                 ostr << '\t' << checkoutDate();
         }
         return ostr;
