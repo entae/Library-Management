@@ -256,22 +256,6 @@ namespace sdds {
     }
 
 //constructor
-    LibApp::LibApp() : m_mainMenu("Seneca Library Application"), m_exitMenu("Changes have been made to the data, what would you like to do?") {
-        m_changed = false;
-
-        //populating mainMenu + exitMenu with 'operator<<'
-        m_mainMenu 
-            << "Add New Publication" 
-            << "Remove Publication"
-            << "Checkout publication from library"
-            << "Return publication to library";
-
-        m_exitMenu 
-            << "Save changes and exit"
-            << "Cancel and go back to the main menu";
-
-        load();
-    }
 
     LibApp::LibApp(const char* filename) : m_mainMenu("Seneca Library Application"), m_exitMenu("Changes have been made to the data, what would you like to do?"), m_publicationTypeMenu("Choose the type of publication:") {
             if (filename) {

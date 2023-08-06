@@ -41,7 +41,6 @@ namespace sdds {
         void checkOutPub();
 
     public:
-        LibApp();
         LibApp(const char* filename);
         ~LibApp();
         void run();
