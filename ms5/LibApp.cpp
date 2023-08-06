@@ -170,7 +170,7 @@ namespace sdds {
         }
 
         if (!abort) {
-            cout << "Adding new publication to library" << endl;
+            cout << "Adding new publication to the library" << endl;
             int pubType = m_publicationTypeMenu.run();
             cin.ignore(1000, '\n');
             Publication* p = nullptr;
