@@ -73,7 +73,6 @@ namespace sdds {
     }
 
     int LibApp::search(int searchType) {
-        cout << "Searching for publication" << endl;
         char title[256]{};
         int selectedType = 0, i = 0, libRef = 0;
         char typeChar;
