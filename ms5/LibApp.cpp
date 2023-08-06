@@ -132,7 +132,6 @@ namespace sdds {
 
         if (!abort) {
             bool confirmed = confirm("Return Publication?");
-
             if (confirmed) {
                 int daysLoaned = Date() - getPub(libRef)->checkoutDate();
                 
@@ -217,7 +216,7 @@ namespace sdds {
         cout << "Removing publication from library" << endl;
         int libRef = search(1);
         if (libRef && confirm("Remove this publication from the library?")) {
-            m_PPA[libRef-1]->setRef(0);
+            getPub(libRef)->setRef(0);
             m_changed = true;
             cout << "Publication removed" << endl;
         }
