@@ -140,8 +140,8 @@ namespace sdds {
                     int penaltyCentsRemainder = penaltyCents % 100;
 
                     cout << "Please pay $";
-                    cout.width(2);
-                    cout.fill('0');
+                    //cout.width(2);
+                    //cout.fill('0');
                     cout << penaltyDollars << '.';
                     cout.width(2);
                     cout << penaltyCentsRemainder;
