@@ -118,7 +118,7 @@ namespace sdds {
             }
         }
         else {
-            cout << "No marches found!" << endl;
+            cout << "No matches found!" << endl;
         }
         return libRef;
     }
