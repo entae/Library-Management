@@ -118,11 +118,11 @@ namespace sdds {
             } 
              ostr << " | ";
 
-            //if (onLoan()) {
+            if (onLoan()) {
                 ostr << m_membership;
-            //} else {
-            //    ostr << " N/A ";
-            //}
+            } else {
+                ostr << " N/A ";
+            }
             ostr << " | " << checkoutDate() << " |";
         }
         else {
