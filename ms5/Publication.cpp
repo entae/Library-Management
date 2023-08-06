@@ -118,7 +118,7 @@ namespace sdds {
             } 
              ostr << " | ";
 
-            if (onLoan()) {
+            if (m_membership) {
                 ostr << m_membership;
             } else {
                 ostr << " N/A ";
@@ -130,7 +130,7 @@ namespace sdds {
                 << m_libRef << '\t'
                 << m_shelfId << '\t'
                 << m_title << '\t';
-                if (onLoan()) {
+                if (m_membership) {
                     ostr << m_membership;
                 }
                 else {
