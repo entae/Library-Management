@@ -172,6 +172,7 @@ namespace sdds {
             cout << "Adding new publication to the library" << endl;
             int pubType = m_publicationTypeMenu.run();
             cin.ignore(1000, '\n');
+
             Publication* p = nullptr;
             if (pubType == 0) {
                 cout << "Aborted!" << endl;
@@ -213,7 +214,7 @@ namespace sdds {
     }
 
     void LibApp::removePublication() {
-        cout << "Removing publication from library" << endl;
+        cout << "Removing publication from the library" << endl;
         int libRef = search(1);
         if (libRef && confirm("Remove this publication from the library?")) {
             getPub(libRef)->setRef(0);
@@ -350,6 +351,7 @@ namespace sdds {
         cout << "Thanks for using Seneca Library Application" << endl;
     }
 
+    //return address of publication in PPA that has the same library ref num as the libRef argument
     Publication* LibApp::getPub(int libRef) {
         Publication* result = nullptr;
         for (int i = 0; i < m_NOLP; i++) {
