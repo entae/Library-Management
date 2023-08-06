@@ -135,11 +135,21 @@ namespace sdds {
 
             if (confirmed) {
                 int daysLoaned = Date() - getPub(libRef)->checkoutDate();
+                
                 if (daysLoaned > SDDS_MAX_LOAN_DAYS) {
                     int penaltyCents = (daysLoaned - SDDS_MAX_LOAN_DAYS) * 50;
-                    cout << "Please pay $" << ( penaltyCents / 100 ) << '.' << setw(2) << setfill('0') << (penaltyCents % 100);
+                    int penaltyDollars = penaltyCents / 100;
+                    int penaltyCentsRemainder = penaltyCents % 100;
+
+                    cout << "Please pay $";
+                    cout.width(2);
+                    cout.fill('0');
+                    cout << penaltyDollars << '.';
+                    cout.width(2);
+                    cout << penaltyCentsRemainder;
+                    cout.fill(' ');
                     cout << " penalty for being " << (daysLoaned - SDDS_MAX_LOAN_DAYS) << " days late!" << endl;
-                }
+            }
 
                 getPub(libRef)->set(0);
                 m_changed = true;
