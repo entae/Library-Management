@@ -203,7 +203,7 @@ namespace sdds {
                         m_LLRN++;
                         p->setRef(m_LLRN);
                         m_PPA[m_NOLP] = p;
-                        m_NOLP++;
+                        ++m_NOLP;
                         m_changed = true;
 
                         cout << "Publication added" << endl;
