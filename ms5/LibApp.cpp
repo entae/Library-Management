@@ -236,7 +236,7 @@ namespace sdds {
                 int inputMembership;
                 bool validInput = false;
                 while (!validInput) {
-                    //cout << "Enter Membership number: ";
+                    cout << "Enter Membership number: ";
 
                     if (!(cin >> inputMembership) || inputMembership < 10000 || inputMembership > 99999) {
                         cin.clear();
