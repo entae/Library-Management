@@ -164,7 +164,7 @@ namespace sdds {
     void LibApp::newPublication() {
         bool abort = false;
         if (m_NOLP >= SDDS_LIBRARY_CAPACITY) {
-            cout << "Library is at its maximum capacity!" << endl;
+            cout << "Library is at its maximum capacity!" << endl << endl;
             abort = true;
         }
         else {
