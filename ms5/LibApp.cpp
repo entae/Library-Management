@@ -168,7 +168,7 @@ namespace sdds {
             abort = true;
         }
 
-        if (!abort) {
+        if (!abort && m_NOLP >= SDDS_LIBRARY_CAPACITY) {
             cout << "Adding new publication to the library" << endl;
             int pubType = m_publicationTypeMenu.run();
             cin.ignore(1000, '\n');
