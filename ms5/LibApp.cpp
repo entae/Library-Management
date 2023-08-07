@@ -166,7 +166,7 @@ namespace sdds {
             cout << "Library is at its maximum capacity!" << endl;
             return;
         }
-        else {
+        else if (m_NOLP < SDDS_LIBRARY_CAPACITY) {
             cout << "Adding new publication to the library" << endl;
             int pubType = m_publicationTypeMenu.run();
             cin.ignore(1000, '\n');
