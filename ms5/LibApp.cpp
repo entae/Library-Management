@@ -162,54 +162,51 @@ namespace sdds {
 //methods with confirmation:
 
     void LibApp::newPublication() {
-        bool abort = false;
         if (m_NOLP == SDDS_LIBRARY_CAPACITY) {
             cout << "Library is at its maximum capacity!" << endl;
-            abort = true;
+            return;
         }
 
-        if (!abort) {
-            cout << "Adding new publication to the library" << endl;
-            int pubType = m_publicationTypeMenu.run();
+        cout << "Adding new publication to the library" << endl;
+        int pubType = m_publicationTypeMenu.run();
+        cin.ignore(1000, '\n');
+
+        Publication *p = nullptr;
+        if (pubType == 0) {
+            cout << "Aborted!" << endl;
+            return;
+        }
+        else if (pubType == 1) {
+            p = new Book;
+        }
+        else if (pubType == 2) {
+            p = new Publication;
+        }
+
+        if (!p) {
+            cout << "Failed to add publication!" << endl;
+            return;
+        }
+
+        if (!(cin >> *p)) {
+            cin.clear();
             cin.ignore(1000, '\n');
-
-            Publication* p = nullptr;
-            if (pubType == 0) {
-                cout << "Aborted!" << endl;
-                abort = true;
-            }
-            else if (pubType == 1) {
-                p = new Book;
-                cin >> *p;
-            }
-            else if (pubType == 2) {
-                p = new Publication;
-                cin >> *p;
-            }
-
-            while (cin.fail()) {
-                cin.ignore(1000,'\n');
-                cin.clear();
-                cout << "Aborted!" << endl;
-                cin >> *p;
-            }
-            
-            if (!abort && confirm("Add this publication to the library?")) {
-                if (!*p) {
-                    cout << "Failed to add publication!" << endl;
-                    delete p;
-                }
-                else {
-                    m_LLRN++;
-                    p->setRef(m_LLRN);
-                    m_PPA[m_NOLP] = p;
-                    m_NOLP++;
-                    m_changed = true;
-
-                    cout << "Publication added" << endl;
-                }
-            }
+            cout << "Invalid input. Aborted!" << endl;
+            delete p;
+            return;
         }
+
+        if (confirm("Add this publication to the library?")) {
+            m_LLRN++;
+            p->setRef(m_LLRN);
+            m_PPA[m_NOLP++] = p;
+            m_changed = true;
+            cout << "Publication added" << endl;
+        }
+        else {
+            delete p;
+        }
+
         cout << endl;
     }
 
