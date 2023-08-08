@@ -44,7 +44,7 @@ int main()
     /// <param name="All the cars:">title of the list to be printed</param>
     /// <param name="C">constant array of Car objects created above</param>
     /// <param name="8">number of elements in the array</param>
-    listArrayElements("All the cars:", C, 8);
+    listArrayElements("All the cars:", C, 7);
     cout << "Searching for Tesla cars: " << endl;
     // Call the search function to search the array C
     // and store the matches in Cres passing "Tesla" as the key argument
