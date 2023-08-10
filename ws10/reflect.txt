@@ -1,0 +1,47 @@
+* I realized I've missed a few reflects and forgot to mention to final project milestones in my reflects, so I have compiled it into this single reflect, if that is acceptable.
+
+ws9: This workshop was interesting to see how c++ could be used to create files containing HTML code. Regarding the actual coding, I luckily had no large issues creating the Text class and getting the usage sample to print properly. It took me a moment to understand how I should code the write override method in the HTMLText class, but then used a switch statement within the loop to convert the characters needed to insert the correct symbol for the value read.
+
+ws10: Most of the time at the beginning of ws10 was spent trying to understand what each module did. I found the most difficult part to be writing up the template summaries after they were written up. For the search function especially, trying to keep the logic of the two types separate was a bit confusing at first. Other than that I realized I had to change the arguments for the Car array to only read 7 objects, and not 8.
+The summaries of the two types are written below:
+/// <summary>
+/// T must be compatible with == operator
+/// K should be compatible with being compared with elements in the T array with the == operator
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="collection">Reference to an array of types, unmodifiable</param>
+/// <param name="array">array of objects of template type</param>
+/// <param name="size">number of elements in the array</param>
+/// <typeparam name="K"></typeparam>
+/// <param name="key">value to search for within array</param>
+/// <returns>true if a match between the K object and an element in the array T are found</returns>
+template <typename T, typename K>
+bool search(Collection<T>& collection, const T* array, int size, const K& key )
+
+/// <summary>
+/// T must be compatible with << operator
+// index operator[] must be defined for T
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="title">title of the list to be printed</param>
+/// <param name="array">constant array of objects of template type</param>
+/// <param name="size">number of elements in the array</param>
+/// <returns>lists all elements of an array</returns>
+template <typename T>
+void listArrayElements(const char* title, const T* array, int size)
+
+
+	
+ms1: 
+Milestone 1 took a bit of time to understand how the Date module worked and should be further implemented. It was a bit hard to grasp what was trying to be achieved until I took another look at the expected output. I found the read and write functions the most difficult to get right. I had to search up how the ignore() and clear() method worked so that I could properly read from the buffer.
+
+ms2:
+The trickiest part of ms2 was definitely the run() method in the LibApp module. Trying to figure out how each case should be handled within a switch statement took me a while to try and get right, especially with the condition of checking if any changes should be discarded or saved. It was also interesting to see how a constructor could be set up to display the different set of menus.
+
+ms3:
+For ms3 it was interesting to set up the Streamable interface of pure virtual functions. The Publication module was much more difficult, I had to ensure the delete statements properly prevented a memory leak, an issue I ran into a few times. I ended up implementing a makeDefault() method to reset the attributes to their default values, and it helped making the constructor easier as well as clearing the values in the read() method before replacing the values with the ones that were inputted. Using the istr.setstate(std::ios::failbit) was something I had to search up to try and understand what it meant to put a istr to a fail state manually. Other than that, making sure that all the formats were proper also took a bit of time. I also had to really understand how the get() method and the getline() method worked, so that I was properly receiving and reading from the buffer without missing any characters. Looking back I likely could have used the get() method with the ignore() and clear() methods, but it was easier to use the getline() method for this modul
+
+ms4: This milestone was a bit shorter to do as it only pertained the Book module, but trying to understand how it worked with all the other modules was a bit confusing at first. As always, the read and write methods were the trickiest to do properly. I had a bit of trouble trying to only read the author's name up to a certain amount of characters. Also remembering to make the bool not only check if the dynamically allocated values existed, but ensuring that they were not empty strings was something I had to fix later on. 
+
+ms5: 
+One of the biggest troubles I had with ms5 was when I missed that I had to change the SDDS_LIBRARY_CAPACITY value from 5000 to 333 in ms55. I could not understand why the newPublication was not showing that the capacity was full until I re-read the instruction. I also realized that I had written my write function to include an if/else statement for when the ostr was not a conIO object, which then the tester showed the membership as being N/A instead of showing a '0'. It took me a while to figure out which module was causing this issue when my attempt at ms51 failed. Other than that overall it was interesting to see how a library system like this required all these modules, but having each module be responsible for certain functions was interesting to notice. If I saw that I was only having trouble with the dates in the output, I could go straight to the Date module and fix how the output format was supposed to be. For the final project there were times when I tried to use the Utils module and the methods that Fardad provided me with by using the 'extern Utils ut'. However, for the later milestones I found it faster to type using the cstring methods, but I do understand the importance of cmoprehending exactly how a method works and appreciate that I am being taught to study and only use methods where I understand what the code is doing. 
